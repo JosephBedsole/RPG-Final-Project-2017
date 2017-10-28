@@ -6,7 +6,6 @@ using UnityEngine;
 public class CharacterInventory : ScriptableObject {
 
 	public Items helmet;
-	public Items sword;
 	public Items rightHand;
 	public Items rightAccessory;
 	public Items leftHand;
