@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Name: MoltenSword
   m_EditorClassIdentifier: 
   itemName: Fire Tongue
-  itemType: Single Handed Weapon
+  itemType: Weapon
   combatSprite: {fileID: 0}
   uiSprite: {fileID: 0}
   damageTypeSprite: {fileID: 0}
   damageType: Fire
-  damage: 20
+  minDamage: 10
+  maxDamage: 25
   speed: 0
   critChance: 50
   health: 20
