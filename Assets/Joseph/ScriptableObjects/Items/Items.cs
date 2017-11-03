@@ -18,7 +18,8 @@ public class Items : ScriptableObject {
 	[Header("Nerd Stuff")]
 	public Sprite damageTypeSprite;
 	public string damageType;
-	public int damage;
+	public int minDamage;
+	public int maxDamage;
 	public int speed;
 	public int critChance;
 	public int health;
