@@ -9,7 +9,7 @@ public class Items : ScriptableObject {
 
 	public string itemName;
 
-	public string itemType;
+	public string itemTag;
 
 	public Sprite combatSprite;   // For the fighting scenes;
 
