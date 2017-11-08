@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour {
+	public static PlayerInventory instance;
+	void Awake ()
+	{
+		if (instance == null)
+		{
+			instance = this;
+		}
+	}
 
 
 	[Header("Inventory Items")]
@@ -49,23 +57,29 @@ public class PlayerInventory : MonoBehaviour {
 
 	public void Action ()
 	{
+		// Promts the options and displays them until a selection is made
 		// Do you want to Equip || Move || Cancel;
 	}
 
-	public void SelectCharacter ()
+	void SelectCharacter ()   // This will get the character's name and class (Lvl later)
 	{
 		// Upon pressing something or doing something else 
 		// Set the Character selected to the character selected
 	}
 
-	void AddItem ()
+	void AddItem ()   // This will Add an Item from other sources to the PlayerInventory
 	{
 		// Call this when buying an item from the shop, opening a chest, or looting an item from battle
+
+		// if (isInShop)    then you should have some sort of exchange of gold
 	}
 
-	public void EquipItem ()
+	public void EquipItem () // This will equip an item to the selected character
 	{
+		// if (weapon class == character class)
 		// Move to a specified character inventory;
+		// else
+		// Display: "You can't equip that class of weapon."
 		if (true) // item tag == weapon
 		{
 			// Move the currently equipped item to the inventory
@@ -84,6 +98,11 @@ public class PlayerInventory : MonoBehaviour {
 			// Display: "You can't equip that dingus."
 		}
 	}
+
+
+
+
+
 
 
 
