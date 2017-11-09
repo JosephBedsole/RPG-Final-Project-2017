@@ -76,5 +76,7 @@ public class BattleManager : MonoBehaviour {
             ctTemp.GetComponent<Image>().fillAmount = 0.0f;      
          }
     }
+
+   
 	
 }
