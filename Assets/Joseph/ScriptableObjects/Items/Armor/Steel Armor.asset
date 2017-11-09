@@ -9,18 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 511700b51eec42a40aa5fe79e3ea6b8e, type: 3}
-  m_Name: MoltenSword
+  m_Name: Steel Armor
   m_EditorClassIdentifier: 
-  itemName: Fire Tongue
-  itemTag: Weapon
-  combatSprite: {fileID: 0}
-  uiSprite: {fileID: 0}
+  itemName: Zion Plate
+  itemTag: armor
+  uiSprite: {fileID: 114399921269231212, guid: ef463394ae96d3a469152e3b3a36d52f, type: 2}
   damageTypeSprite: {fileID: 0}
-  damageType: Fire
-  minDamage: 10
-  maxDamage: 25
-  speed: 0
-  critChance: 50
-  health: 20
-  armor: 0
-  magicResist: 20
+  damageType: 
+  minDamage: 0
+  maxDamage: 0
+  speed: 30
+  crit: 0
+  health: 100

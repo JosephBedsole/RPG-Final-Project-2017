@@ -14,10 +14,11 @@ public class PlayerInventory : MonoBehaviour {
 
 
 	[Header("Inventory Items")]
-	public Items[] weapons;
-	public Items[] armor;
-	public Items[] accessories;
-	public Items[] consumables;
+	public Items[] items;
+
+	public Items item;
+
+
 
 
 	[Header("Item Visualization")]
@@ -26,7 +27,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	void Start () 
 	{
-		
+		item = items[1];
 	}
 	
 	void Update () 
@@ -55,18 +56,6 @@ public class PlayerInventory : MonoBehaviour {
 		// }
 	}
 
-	public void Action ()
-	{
-		// Promts the options and displays them until a selection is made
-		// Do you want to Equip || Move || Cancel;
-	}
-
-	void SelectCharacter ()   // This will get the character's name and class (Lvl later)
-	{
-		// Upon pressing something or doing something else 
-		// Set the Character selected to the character selected
-	}
-
 	void AddItem ()   // This will Add an Item from other sources to the PlayerInventory
 	{
 		// Call this when buying an item from the shop, opening a chest, or looting an item from battle
@@ -76,10 +65,8 @@ public class PlayerInventory : MonoBehaviour {
 
 	public void EquipItem () // This will equip an item to the selected character
 	{
-		// if (weapon class == character class)
+		// if (item class == character class)
 		// Move to a specified character inventory;
-		// else
-		// Display: "You can't equip that class of weapon."
 		if (true) // item tag == weapon
 		{
 			// Move the currently equipped item to the inventory
@@ -97,6 +84,8 @@ public class PlayerInventory : MonoBehaviour {
 		{
 			// Display: "You can't equip that dingus."
 		}
+		// else
+		// Display: "You can't equip that class of weapon."
 	}
 
 

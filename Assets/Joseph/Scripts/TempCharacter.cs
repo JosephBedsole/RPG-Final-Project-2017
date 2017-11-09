@@ -16,6 +16,6 @@ public class TempCharacter : MonoBehaviour {
 
 	public Items mainHand;
 	public Items armor;
-	public Item accessory;
+	public Items accessory;
 
 }
