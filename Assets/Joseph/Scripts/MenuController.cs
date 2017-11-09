@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MenuController : MonoBehaviour {
 
 	[Header("Menus")]
+	public Transform taskMenu;
 	public Transform menu;
 	public Transform menuSelect;
 	public Transform inventoryMenu;
@@ -39,7 +40,7 @@ public class MenuController : MonoBehaviour {
 			StartCoroutine("BufferTime");
 		}
 
-		
+
 
 		if (Input.GetKey(KeyCode.Escape) && (inMenuSelect && !inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu) && !waitTime) // Exit during equipping stage?
 		{
@@ -71,6 +72,7 @@ public class MenuController : MonoBehaviour {
 	{
 		inMenuSelect = true;
 		
+		taskMenu.gameObject.SetActive(false);
 		menu.gameObject.SetActive(true);
 	}
 
@@ -121,6 +123,7 @@ public class MenuController : MonoBehaviour {
 	{
 		inMenuSelect = false;
 
+		taskMenu.gameObject.SetActive(true);
 		menu.gameObject.SetActive(false);
 	}
 
