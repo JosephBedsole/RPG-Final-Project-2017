@@ -22,6 +22,7 @@ public class MenuController : MonoBehaviour {
     public TempCharacter characterSelected; // How will this be set to null again?
 
     [Header("Menu bools")]
+	public bool waitTime;
 	public bool inMenuSelect;
 	public bool inSecondTierMenus;
 	public bool inEquipmentMenu;
@@ -32,25 +33,33 @@ public class MenuController : MonoBehaviour {
 	void Update ()
 	{
 		// View menu after a key is pressed
-		if (Input.GetKey(KeyCode.Escape) && (!inMenuSelect && !inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu))
+		if (Input.GetKey(KeyCode.E) && (!inMenuSelect && !inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu) && !waitTime)
 		{
 			OpenMenu();
+			StartCoroutine("BufferTime");
 		}
-		else if (Input.GetKey(KeyCode.Escape) && (inMenuSelect && !inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu)) // Exit during equipping stage?
+
+		
+
+		if (Input.GetKey(KeyCode.Escape) && (inMenuSelect && !inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu) && !waitTime) // Exit during equipping stage?
 		{
 			CloseMenu();
+			StartCoroutine("BufferTime");
 		}
-        else if (Input.GetKey(KeyCode.Escape) && (inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu))
+        else if (Input.GetKey(KeyCode.Escape) && (inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu) && !waitTime)
 		{
 			ReturnToMenuSelect();
+			StartCoroutine("BufferTime");
 		}
-		else if (Input.GetKey(KeyCode.Escape) && (inEquipmentMenu && !inEquipItemMenu))
+		else if (Input.GetKey(KeyCode.Escape) && (inEquipmentMenu && !inEquipItemMenu) && !waitTime)
 		{
 			ReturnToPartyMenu();
+			StartCoroutine("BufferTime");
 		}
-		else if (Input.GetKey(KeyCode.Escape) && inEquipItemMenu)
+		else if (Input.GetKey(KeyCode.Escape) && inEquipItemMenu && !waitTime)
 		{
 			ReturnToEquipmentMenu();
+			StartCoroutine("BufferTime");
 		}
 
 	}
@@ -236,6 +245,13 @@ public class MenuController : MonoBehaviour {
 		// Asks if you are certain about your choice
 		// Runs The EquipItem() function from the PlayerInventory script
 		// Disables the sanity check function and displays "Item Equipped" || "You Can't Equip That"
+	}
+
+	IEnumerator BufferTime ()
+	{
+		waitTime = true;
+		yield return new WaitForSeconds(0.1f);
+		waitTime = false;
 	}
 
 

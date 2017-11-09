@@ -860,7 +860,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &137563189
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1482,6 +1482,10 @@ MonoBehaviour:
   equipItemMenu: {fileID: 0}
   quitPrompt: {fileID: 0}
   characterSelected: {fileID: 0}
+  inMenuSelect: 0
+  inSecondTierMenus: 0
+  inEquipmentMenu: 0
+  inEquipItemMenu: 0
   mainHand: {fileID: 0}
   armor: {fileID: 0}
   acc: {fileID: 0}
@@ -5131,7 +5135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1271758688
 RectTransform:
   m_ObjectHideFlags: 0
