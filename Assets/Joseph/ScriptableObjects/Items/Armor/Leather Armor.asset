@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511700b51eec42a40aa5fe79e3ea6b8e, type: 3}
+  m_Name: Leather Armor
+  m_EditorClassIdentifier: 
+  itemName: Cow Master
+  itemTag: armor
+  uiSprite: {fileID: 114399921269231212, guid: ef463394ae96d3a469152e3b3a36d52f, type: 2}
+  damageTypeSprite: {fileID: 0}
+  damageType: 
+  minDamage: 0
+  maxDamage: 0
+  speed: 70
+  crit: 30
+  health: 50
