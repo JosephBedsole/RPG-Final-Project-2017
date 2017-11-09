@@ -29,10 +29,15 @@ public class BattleCanvasController : MonoBehaviour {
 	GameObject actionPanel;
 	GameObject pcPanels;
 	GameObject enemyPanels;
-	GameObject enemySprites;
+	GameObject enemySprites;	
+
+	int actingPlayer;
 
 	List<Image> ctList = new List<Image>(); // TODO: get cts onEnable instead of dragndrop
 	List<float> ctListSpeed = new List<float>();
+
+	public delegate void PlayerActed(int playerNum);
+	public static event PlayerActed playerActed = delegate{};
 	
 
 	void OnEnable(){
@@ -47,26 +52,29 @@ public class BattleCanvasController : MonoBehaviour {
 		ctList.Add(ct4);
 		
 		for (int i = 0; i < ctList.Count; i++){
-			ctList[i].fillAmount = 0.3f;
+			//ctList[i].fillAmount = 0.3f;
 		}
 
-		SetCTImageFill(GetCTImage(ct1));
+		//SetCTImageFill(GetCTImage(ct1));
 	}
 
 	public void ButtonClicked(string s){
 		Debug.Log(s);
 	}
 
-	public void PCClick(){
+	public void PCClick(int playerNum){
 		if(selection == Selection.none){
 			actionPanel.SetActive(true);
 			selection = Selection.pc;
+			actingPlayer = playerNum;
 			Debug.Log("Player selected, choose action");
 		}
 		else if(selection == Selection.action){
 			selection = Selection.none;
 			actionPanel.SetActive(false);
-			Debug.Log("Performing actiion on target pc");
+			Debug.Log("Performing action on target pc");
+			playerActed(actingPlayer);
+			actingPlayer = 0;
 		}
 		
 	}
@@ -84,6 +92,8 @@ public class BattleCanvasController : MonoBehaviour {
 			selection = Selection.none;
 			actionPanel.SetActive(false);
 			Debug.Log("Performing action on target enemy");
+			playerActed(actingPlayer);
+			actingPlayer = 0;
 		}
 	}
 
