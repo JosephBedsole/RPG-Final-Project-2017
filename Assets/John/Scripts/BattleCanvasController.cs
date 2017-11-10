@@ -32,7 +32,7 @@ public class BattleCanvasController : MonoBehaviour {
 
 	int actingPlayer;
 
-	List<GameObject> pcPanelList = new List<GameObject>();
+	public List<GameObject> pcPanelList = new List<GameObject>();
 	List<Image> ctList = new List<Image>(); // TODO: get cts onEnable instead of dragndrop
 	List<float> ctListSpeed = new List<float>();
 
@@ -55,12 +55,19 @@ public class BattleCanvasController : MonoBehaviour {
 		pcPanelList.Add(GameObject.Find("pc2"));
 		pcPanelList.Add(GameObject.Find("pc3"));
 		pcPanelList.Add(GameObject.Find("pc4"));
-
-		
 	}
 
 	void Start(){
 		SetPlayerStatsUI();
+	}
+
+	void Update(){
+		for(int i = 0; i < 4; i++){
+			if(BattleManager.instance.pcSheets[i].canAct == false)
+				pcPanelList[i].GetComponent<Image>().color = new Color(1,1,1,0.1f);
+			else
+				pcPanelList[i].GetComponent<Image>().color = new Color(1,1,1,1.0f);
+		}
 	}
 
 	public void ButtonClicked(string s){
@@ -115,7 +122,7 @@ public class BattleCanvasController : MonoBehaviour {
 		   GameObject currentPanel = pcPanelList[i];
 
 		   GameObject tempName = GetPlayerAttributeUI(currentPanel, "Name");
-		   tempName.GetComponent<Text>().text = GameManager.instance.pcList[i].name;
+		   tempName.GetComponent<Text>().text = GameManager.instance.pcList[i].characterName;
            GameObject tempLevel = GetPlayerAttributeUI(currentPanel, "Level");
 		   tempLevel.GetComponent<Text>().text = "LVL" + GameManager.instance.pcList[i].LVL.ToString();
 		   GameObject tempHP = GetPlayerAttributeUI(currentPanel, "HP");

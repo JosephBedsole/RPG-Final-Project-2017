@@ -5,34 +5,40 @@ using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour {
 
-    public GameObject pc1;
-    public GameObject pc2;
-    public GameObject pc3;
-    public GameObject pc4;
+    public static BattleManager instance = null;
 
-    public float DebugCTRate = 0.05f;
+    public float startCT = 0.0f;
+    public float debugCTRate = 0.05f;
 
-    List<GameObject> pcList = new List<GameObject>();
+    float MAXCT = 1.0f;
+    float MINCT = 0.0f;
+    public float BASE_CT_CHARGE = 0.00001f;
+
+    List<GameObject> pcPanelList = new List<GameObject>();
+    List<PlayerCharacter> _pcSheets = new List<PlayerCharacter>();
+    public List<PlayerCharacter> pcSheets {
+        get{return _pcSheets;}
+    }
+    
+    void Awake(){
+        if(instance == null) instance = this;
+        else Destroy(gameObject);
+    }
 
     void OnEnable(){
-        pc1 = GameObject.Find("pc1");
-        pc2 = GameObject.Find("pc2");
-        pc3 = GameObject.Find("pc3");
-        pc4 = GameObject.Find("pc4");
-    
-        pcList.Add(pc1);
-		pcList.Add(pc2);
-		pcList.Add(pc3);
-		pcList.Add(pc4);
-
-        SetStartChargeTime(0.1f);
-
         BattleCanvasController.playerActed += ResetChargeTime;
-    
     }
 
     void OnDisable(){
         BattleCanvasController.playerActed -= ResetChargeTime;
+    }
+
+    void Start(){
+        pcPanelList.AddRange(BattleCanvasController.instance.pcPanelList);
+        pcSheets.AddRange(GameManager.instance.pcList);
+        SetPartyAct(false);
+        SetStartChargeTime(0.0f);
+
     }
 
     void Update(){
@@ -41,18 +47,20 @@ public class BattleManager : MonoBehaviour {
 
 
     public void SetStartChargeTime(float startCT){
-        for (int i = 0; i < pcList.Count; i++){
-            GameObject ctTemp = pcList[i].transform.Find("CT").gameObject;
+        for (int i = 0; i < pcPanelList.Count; i++){
+            GameObject ctTemp = pcPanelList[i].transform.Find("CT").gameObject;
             ctTemp.GetComponent<Image>().fillAmount = startCT;
         }
     }
 
     public void UpdateCT(){
-
-        for (int i = 0; i < pcList.Count; i++){
-            GameObject ctTemp = pcList[i].transform.Find("CT").gameObject;
+        for (int i = 0; i < pcPanelList.Count; i++){
+            GameObject ctTemp = pcPanelList[i].transform.Find("CT").gameObject;
             if(ctTemp.GetComponent<Image>().fillAmount < 1.0f){
-                ctTemp.GetComponent<Image>().fillAmount += DebugCTRate;
+                ctTemp.GetComponent<Image>().fillAmount += BASE_CT_CHARGE + (float)pcSheets[i].CT/1000;
+            }
+            else{
+                pcSheets[i].canAct = true;
             }
         }
     }
@@ -60,23 +68,30 @@ public class BattleManager : MonoBehaviour {
     public void ResetChargeTime(int playerNum){
         Debug.Log("RESETCHARGE");
         if(playerNum == 1){
-            GameObject ctTemp = pc1.transform.Find("CT").gameObject;
+            GameObject ctTemp = pcPanelList[0].transform.Find("CT").gameObject;
             ctTemp.GetComponent<Image>().fillAmount = 0.0f;
+            pcSheets[0].canAct = false;
         }
         else if(playerNum == 2){
-            GameObject ctTemp = pc2.transform.Find("CT").gameObject;
-            ctTemp.GetComponent<Image>().fillAmount = 0.0f;        
+            GameObject ctTemp = pcPanelList[1].transform.Find("CT").gameObject;
+            ctTemp.GetComponent<Image>().fillAmount = 0.0f;
+            pcSheets[1].canAct = false;    
         }
         else if(playerNum == 3){
-            GameObject ctTemp = pc3.transform.Find("CT").gameObject;
-            ctTemp.GetComponent<Image>().fillAmount = 0.0f;           
+            GameObject ctTemp = pcPanelList[2].transform.Find("CT").gameObject;
+            ctTemp.GetComponent<Image>().fillAmount = 0.0f;
+            pcSheets[2].canAct = false; 
          }
         else if(playerNum == 4){
-            GameObject ctTemp = pc4.transform.Find("CT").gameObject;
-            ctTemp.GetComponent<Image>().fillAmount = 0.0f;      
+            GameObject ctTemp = pcPanelList[3].transform.Find("CT").gameObject;
+            ctTemp.GetComponent<Image>().fillAmount = 0.0f;
+            pcSheets[3].canAct = false;        
          }
     }
 
-   
-	
+    public void SetPartyAct(bool b){
+        for (int i = 0; i < pcSheets.Count; i++){
+            pcSheets[i].canAct = b;
+        }
+    }
 }

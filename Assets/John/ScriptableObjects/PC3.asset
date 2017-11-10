@@ -11,10 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565174122c1d0714fb21d3129d1859a5, type: 3}
   m_Name: PC3
   m_EditorClassIdentifier: 
-  name: Cat
+  characterName: 
   LVL: 1
   HP: 70
   MP: 70
   Guts: 0
   Spirit: 0
-  CT: 7
+  CT: 8
+  canAct: 1

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 
 	public List<PlayerCharacter> pcList = new List<PlayerCharacter>();
 
-	void Start(){
+	void Awake(){
 		if (instance == null){
 			instance = this;
 		}
