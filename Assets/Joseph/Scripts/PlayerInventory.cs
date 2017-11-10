@@ -13,13 +13,12 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 
+	public int gold = 0;
+
 	[Header("Inventory Items")]
 	public Items[] items;
 
 	public Items item;
-
-
-
 
 	[Header("Item Visualization")]
 	public Transform[] inventorySlots; 
@@ -33,27 +32,6 @@ public class PlayerInventory : MonoBehaviour {
 	void Update () 
 	{
 
-		// if (Input.GetButton("Jump"))
-		// {
-		// 	TempCharacter.instance.mainHand = weapons[0];
-		// 	// Disable the menu
-		// 	// Display sub menu with Equip / Move / Drop
-		// 	if (Input.GetButton("Jump"))
-		// 	{
-		// 		// Use the event system to call one of the functions
-		// 		// Hide the sub menu
-		// 		//Enable the menu
-		// 	}
-		// 	else if (Input.GetButton("Fire1"))
-		// 	{
-		// 		// Hide the sub menu
-		// 		// Enable the menu
-		// 	}
-		// }
-		// else if (Input.GetButton("Fire1"))
-		// {
-		// 	// Close Inventory
-		// }
 	}
 
 	void AddItem ()   // This will Add an Item from other sources to the PlayerInventory

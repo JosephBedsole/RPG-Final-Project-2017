@@ -34,7 +34,7 @@ public class MenuController : MonoBehaviour {
 	void Update ()
 	{
 		// View menu after a key is pressed
-		if (Input.GetKey(KeyCode.E) && (!inMenuSelect && !inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu) && !waitTime)
+		if (Input.GetKey(KeyCode.E) && (!ShopController.instance.inShopMenu && !inMenuSelect && !inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu) && !waitTime)
 		{
 			OpenMenu();
 			StartCoroutine("BufferTime");
