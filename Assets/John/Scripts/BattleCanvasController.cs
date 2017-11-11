@@ -33,12 +33,12 @@ public class BattleCanvasController : MonoBehaviour {
 	int actingPlayer;
 
 	public List<GameObject> pcPanelList = new List<GameObject>();
+	public List<GameObject> enemyPanelList = new List<GameObject>();
 	List<Image> ctList = new List<Image>(); // TODO: get cts onEnable instead of dragndrop
 	List<float> ctListSpeed = new List<float>();
 
 	public delegate void PlayerActed(int playerNum);
 	public static event PlayerActed playerActed = delegate{};
-	
 
 	void OnEnable(){
 		if (instance == null) instance = this; 
@@ -55,10 +55,16 @@ public class BattleCanvasController : MonoBehaviour {
 		pcPanelList.Add(GameObject.Find("pc2"));
 		pcPanelList.Add(GameObject.Find("pc3"));
 		pcPanelList.Add(GameObject.Find("pc4"));
+
+		enemyPanelList.Add(GameObject.Find("EnemyPanel1"));
+		enemyPanelList.Add(GameObject.Find("EnemyPanel2"));
+		enemyPanelList.Add(GameObject.Find("EnemyPanel3"));
+		enemyPanelList.Add(GameObject.Find("EnemyPanel4"));
 	}
 
 	void Start(){
 		SetPlayerStatsUI();
+		SetEnemyStatsUI();
 	}
 
 	void Update(){
@@ -75,7 +81,7 @@ public class BattleCanvasController : MonoBehaviour {
 	}
 
 	public void PCClick(int playerNum){
-		if(selection == Selection.none){
+		if(BattleManager.instance.CanPCAct(playerNum-1) && selection == Selection.none){
 			actionPanel.SetActive(true);
 			selection = Selection.pc;
 			actingPlayer = playerNum;
@@ -88,7 +94,6 @@ public class BattleCanvasController : MonoBehaviour {
 			playerActed(actingPlayer);
 			actingPlayer = 0;
 		}
-		
 	}
 
 	public void ActionClick(){
@@ -99,7 +104,7 @@ public class BattleCanvasController : MonoBehaviour {
 			
 	}
 
-	public void EnemyClick(){
+	public void EnemyClick(int enemyNum){
 		if(selection == Selection.action){
 			selection = Selection.none;
 			actionPanel.SetActive(false);
@@ -117,7 +122,7 @@ public class BattleCanvasController : MonoBehaviour {
 		ctList[ctList.IndexOf(ct)].fillAmount = 1;
 	}
 
-	 void SetPlayerStatsUI(){
+	void SetPlayerStatsUI(){
        for (int i = 0; i < pcPanelList.Count; i++){
 		   GameObject currentPanel = pcPanelList[i];
 
@@ -134,6 +139,25 @@ public class BattleCanvasController : MonoBehaviour {
 
 	GameObject GetPlayerAttributeUI(GameObject playerPanel, string attr){
 		return playerPanel.transform.Find(attr).gameObject;
+	}
+
+	void SetEnemyStatsUI(){
+		for(int i = 0; i < enemyPanelList.Count; i++){
+			GameObject currentPanel = enemyPanelList[i];
+
+			GameObject tempName = GetEnemyAttributeUI(currentPanel, "Name");
+			tempName.GetComponent<Text>().text = GameManager.instance.enemyList[i].characterName;
+			GameObject tempLevel = GetEnemyAttributeUI(currentPanel, "Level");
+			tempLevel.GetComponent<Text>().text = GameManager.instance.enemyList[i].LVL.ToString();
+			GameObject tempHP = GetEnemyAttributeUI(currentPanel, "HP");
+			tempHP.GetComponent<Text>().text = GameManager.instance.enemyList[i].HP.ToString();
+			GameObject tempMP = GetEnemyAttributeUI(currentPanel, "MP");
+			tempMP.GetComponent<Text>().text = "MP" + GameManager.instance.enemyList[i].ToString();
+		}
+	}
+
+	GameObject GetEnemyAttributeUI(GameObject enemyPanel, string attr){
+		return enemyPanel.transform.Find(attr).gameObject;
 	}
 
 }

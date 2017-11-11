@@ -15,9 +15,14 @@ public class BattleManager : MonoBehaviour {
     public float BASE_CT_CHARGE = 0.00001f;
 
     List<GameObject> pcPanelList = new List<GameObject>();
+    List<GameObject> enemyPanelList = new List<GameObject>();
     List<PlayerCharacter> _pcSheets = new List<PlayerCharacter>();
     public List<PlayerCharacter> pcSheets {
         get{return _pcSheets;}
+    }
+    List<EnemyCharacter> _enemySheets = new List<EnemyCharacter>();
+    public List<EnemyCharacter> enemySheets {
+        get{return _enemySheets;}
     }
     
     void Awake(){
@@ -35,7 +40,9 @@ public class BattleManager : MonoBehaviour {
 
     void Start(){
         pcPanelList.AddRange(BattleCanvasController.instance.pcPanelList);
+        enemyPanelList.AddRange(BattleCanvasController.instance.enemyPanelList);
         pcSheets.AddRange(GameManager.instance.pcList);
+        enemySheets.AddRange(GameManager.instance.enemyList);
         SetPartyAct(false);
         SetStartChargeTime(0.0f);
 
@@ -93,5 +100,10 @@ public class BattleManager : MonoBehaviour {
         for (int i = 0; i < pcSheets.Count; i++){
             pcSheets[i].canAct = b;
         }
+    }
+
+    public bool CanPCAct(int pcSheet){
+        return pcSheets[pcSheet].canAct;
+        
     }
 }

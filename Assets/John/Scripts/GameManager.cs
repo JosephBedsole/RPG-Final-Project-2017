@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance = null;
 
 	public List<PlayerCharacter> pcList = new List<PlayerCharacter>();
+	public List<EnemyCharacter> enemyList = new List<EnemyCharacter>();
 
 	void Awake(){
 		if (instance == null){

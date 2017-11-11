@@ -621,7 +621,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1105381872}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -41.19861, y: 185.18745, z: 0}
+  m_LocalPosition: {x: -40.762466, y: 181.34375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 644041817}
@@ -763,7 +763,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 422504652}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -41.583416, z: 0}
+  m_LocalPosition: {x: 0, y: -40.72749, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1402231287}
@@ -1106,7 +1106,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 524210941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.223572, y: -135.70819, z: 0}
+  m_LocalPosition: {x: 28.969086, y: -132.92004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 815504325}
@@ -1579,7 +1579,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 725218440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -206.6853, y: 19.035515, z: 0}
+  m_LocalPosition: {x: -204.81224, y: 18.63501, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2061470816}
@@ -1759,7 +1759,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 815504324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 41.58341, z: 0}
+  m_LocalPosition: {x: 0, y: 40.72748, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1463001527}
@@ -1899,12 +1899,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad838d9cd2230b24aa650b877a2b3c15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pcPanel1: {fileID: 0}
-  pcPanel2: {fileID: 0}
-  pcPanel3: {fileID: 0}
-  pcPanel4: {fileID: 0}
-  DebugCTRate: 0.05
-  BASE_CT_CHARGE: 0.01
+  startCT: 0
+  debugCTRate: 0.05
+  BASE_CT_CHARGE: 0.001
 --- !u!4 &826240334
 Transform:
   m_ObjectHideFlags: 0
@@ -1950,6 +1947,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a95bbcc1bfe1b4249847b71175ac8239, type: 2}
   - {fileID: 11400000, guid: e9ce511f7e316a041b1d634d08bb8a08, type: 2}
   - {fileID: 11400000, guid: dd7d7da1915618e41b38dc64e2dc5a86, type: 2}
+  enemyList:
+  - {fileID: 11400000, guid: 7542985f91a825e488865272326ed765, type: 2}
+  - {fileID: 11400000, guid: ebdc8a68263d9024ea567d6cf8e8dc1b, type: 2}
+  - {fileID: 11400000, guid: 59f9c8360300df94a8e1741a6d9887e1, type: 2}
+  - {fileID: 11400000, guid: 797f975bf2f87db4aa3f5f9e4c002976, type: 2}
 --- !u!4 &834849417
 Transform:
   m_ObjectHideFlags: 0
@@ -2356,7 +2358,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1494088936}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 166.03401, y: 187.38737, z: 0}
+  m_LocalPosition: {x: 164.51483, y: 183.54367, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1913448207}
@@ -2467,11 +2469,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1485870683}
         m_MethodName: EnemyClick
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2755,12 +2757,12 @@ Prefab:
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -98.96752
+      value: -98.07337
       objectReference: {fileID: 0}
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -23.052979
+      value: -22.650513
       objectReference: {fileID: 0}
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
@@ -2883,7 +2885,7 @@ Prefab:
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -98.96752
+      value: -98.07337
       objectReference: {fileID: 0}
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
@@ -3187,7 +3189,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1485870678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 278, y: 219.5, z: 0}
+  m_LocalPosition: {x: 275.5, y: 215, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 725218441}
@@ -3225,6 +3227,7 @@ MonoBehaviour:
   ct3Speed: 0
   ct4Speed: 0
   pcPanelList: []
+  enemyPanelList: []
 --- !u!1 &1494088936
 GameObject:
   m_ObjectHideFlags: 0
@@ -3320,12 +3323,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1485870683}
-        m_MethodName: EnemyClick
-        m_Mode: 1
+        m_MethodName: PCClick
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3713,11 +3716,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1485870683}
         m_MethodName: EnemyClick
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3732,7 +3735,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1646992944}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -158.50928, y: 185.68745, z: 0}
+  m_LocalPosition: {x: -157.07034, y: 181.84375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 815706492}
@@ -3991,7 +3994,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2034498445}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 57.610046, y: 185.68745, z: 0}
+  m_LocalPosition: {x: 57.08928, y: 181.84375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 148186229}
@@ -4209,12 +4212,12 @@ Prefab:
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 98.967514
+      value: 98.07338
       objectReference: {fileID: 0}
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -23.052979
+      value: -22.650513
       objectReference: {fileID: 0}
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
@@ -4498,11 +4501,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1485870683}
         m_MethodName: EnemyClick
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4583,7 +4586,7 @@ Prefab:
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 98.967514
+      value: 98.07338
       objectReference: {fileID: 0}
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
