@@ -74,22 +74,22 @@ public class BattleManager : MonoBehaviour {
 
     public void ResetChargeTime(int playerNum){
         Debug.Log("RESETCHARGE");
-        if(playerNum == 1){
+        if(playerNum == 0){
             GameObject ctTemp = pcPanelList[0].transform.Find("CT").gameObject;
             ctTemp.GetComponent<Image>().fillAmount = 0.0f;
             pcSheets[0].canAct = false;
         }
-        else if(playerNum == 2){
+        else if(playerNum == 1){
             GameObject ctTemp = pcPanelList[1].transform.Find("CT").gameObject;
             ctTemp.GetComponent<Image>().fillAmount = 0.0f;
             pcSheets[1].canAct = false;    
         }
-        else if(playerNum == 3){
+        else if(playerNum == 2){
             GameObject ctTemp = pcPanelList[2].transform.Find("CT").gameObject;
             ctTemp.GetComponent<Image>().fillAmount = 0.0f;
             pcSheets[2].canAct = false; 
          }
-        else if(playerNum == 4){
+        else if(playerNum == 3){
             GameObject ctTemp = pcPanelList[3].transform.Find("CT").gameObject;
             ctTemp.GetComponent<Image>().fillAmount = 0.0f;
             pcSheets[3].canAct = false;        

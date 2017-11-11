@@ -25,6 +25,8 @@ public class BattleCanvasController : MonoBehaviour {
 	[HideInInspector]
 	public enum Selection {none, pc, action, enemy}
 	Selection selection = Selection.none;
+	public enum Action {none, attack, skill, item}
+	Action action = Action.none;
 
 	GameObject actionPanel;
 	GameObject enemyPanels;
@@ -34,6 +36,7 @@ public class BattleCanvasController : MonoBehaviour {
 
 	public List<GameObject> pcPanelList = new List<GameObject>();
 	public List<GameObject> enemyPanelList = new List<GameObject>();
+	public List<GameObject> actionPanelList = new List<GameObject>();
 	List<Image> ctList = new List<Image>(); // TODO: get cts onEnable instead of dragndrop
 	List<float> ctListSpeed = new List<float>();
 
@@ -60,6 +63,10 @@ public class BattleCanvasController : MonoBehaviour {
 		enemyPanelList.Add(GameObject.Find("EnemyPanel2"));
 		enemyPanelList.Add(GameObject.Find("EnemyPanel3"));
 		enemyPanelList.Add(GameObject.Find("EnemyPanel4"));
+
+		actionPanelList.Add(GameObject.Find("Attack"));
+		actionPanelList.Add(GameObject.Find("Skill"));
+		actionPanelList.Add(GameObject.Find("Item"));
 	}
 
 	void Start(){
@@ -81,7 +88,7 @@ public class BattleCanvasController : MonoBehaviour {
 	}
 
 	public void PCClick(int playerNum){
-		if(BattleManager.instance.CanPCAct(playerNum-1) && selection == Selection.none){
+		if(BattleManager.instance.CanPCAct(playerNum) && selection == Selection.none){
 			actionPanel.SetActive(true);
 			selection = Selection.pc;
 			actingPlayer = playerNum;
@@ -92,25 +99,54 @@ public class BattleCanvasController : MonoBehaviour {
 			actionPanel.SetActive(false);
 			Debug.Log("Performing action on target pc");
 			playerActed(actingPlayer);
-			actingPlayer = 0;
+			actingPlayer = -1;
 		}
 	}
 
-	public void ActionClick(){
+	public void ActionClick(int actionNum){
 		if(selection == Selection.pc){
-			selection = Selection.action;
-			Debug.Log("Action Selected, choose target");
+			switch(actionNum){
+				case(1):
+					selection = Selection.action;
+					action = Action.attack;
+					Debug.Log("Action Selected, choose target");
+				break;
+				case(2):
+					selection = Selection.action;
+					action = Action.skill;
+					Debug.Log("Action Selected, choose target");
+				break;
+				case(3):
+					selection = Selection.action;
+					action = Action.item;
+					Debug.Log("Action Selected, choose target");			
+				break;
+				default:
+					Debug.Log("Action Error");
+				break;
+			}
 		}	
 			
 	}
 
 	public void EnemyClick(int enemyNum){
 		if(selection == Selection.action){
+			switch(action){
+				case(Action.attack):
+					AttackEnemy(enemyNum, actingPlayer);
+				
+					actingPlayer = -1;
+				break;
+				case(Action.skill):
+				break;
+				case(Action.item):
+				break;
+			}
+
 			selection = Selection.none;
 			actionPanel.SetActive(false);
 			Debug.Log("Performing action on target enemy");
 			playerActed(actingPlayer);
-			actingPlayer = 0;
 		}
 	}
 
@@ -129,7 +165,7 @@ public class BattleCanvasController : MonoBehaviour {
 		   GameObject tempName = GetPlayerAttributeUI(currentPanel, "Name");
 		   tempName.GetComponent<Text>().text = GameManager.instance.pcList[i].characterName;
            GameObject tempLevel = GetPlayerAttributeUI(currentPanel, "Level");
-		   tempLevel.GetComponent<Text>().text = "LVL" + GameManager.instance.pcList[i].LVL.ToString();
+		   tempLevel.GetComponent<Text>().text = "LVL: " + GameManager.instance.pcList[i].LVL.ToString();
 		   GameObject tempHP = GetPlayerAttributeUI(currentPanel, "HP");
 		   tempHP.GetComponent<Text>().text = "HP" + GameManager.instance.pcList[i].HP.ToString();
 		   GameObject tempMP = GetPlayerAttributeUI(currentPanel, "MP");
@@ -148,16 +184,21 @@ public class BattleCanvasController : MonoBehaviour {
 			GameObject tempName = GetEnemyAttributeUI(currentPanel, "Name");
 			tempName.GetComponent<Text>().text = GameManager.instance.enemyList[i].characterName;
 			GameObject tempLevel = GetEnemyAttributeUI(currentPanel, "Level");
-			tempLevel.GetComponent<Text>().text = GameManager.instance.enemyList[i].LVL.ToString();
+			tempLevel.GetComponent<Text>().text = "Level: " + GameManager.instance.enemyList[i].LVL.ToString();
 			GameObject tempHP = GetEnemyAttributeUI(currentPanel, "HP");
-			tempHP.GetComponent<Text>().text = GameManager.instance.enemyList[i].HP.ToString();
+			tempHP.GetComponent<Text>().text = "HP: " + GameManager.instance.enemyList[i].HP.ToString();
 			GameObject tempMP = GetEnemyAttributeUI(currentPanel, "MP");
-			tempMP.GetComponent<Text>().text = "MP" + GameManager.instance.enemyList[i].ToString();
+			tempMP.GetComponent<Text>().text = "MP: " + GameManager.instance.enemyList[i].MP.ToString();
 		}
 	}
 
 	GameObject GetEnemyAttributeUI(GameObject enemyPanel, string attr){
 		return enemyPanel.transform.Find(attr).gameObject;
+	}
+
+	void AttackEnemy(int target, int pc){
+		GameManager.instance.enemyList[target].HP -= GameManager.instance.pcList[pc].pAttackStrength;
+		SetEnemyStatsUI();
 	}
 
 }

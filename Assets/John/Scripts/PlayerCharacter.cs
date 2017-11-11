@@ -16,4 +16,8 @@ public class PlayerCharacter : ScriptableObject {
 
 
 
+	public int pAttackStrength = 5;
+
+
+
 }
