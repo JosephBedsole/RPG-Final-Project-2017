@@ -15,6 +15,8 @@ MonoBehaviour:
   LVL: 1
   HP: 100
   MP: 30
-  Guts: 0
+  Guts: 5
   Spirit: 0
   CT: 1
+  canAct: 0
+  pAttackStrength: 5

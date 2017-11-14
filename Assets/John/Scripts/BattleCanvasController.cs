@@ -99,7 +99,7 @@ public class BattleCanvasController : MonoBehaviour {
 			actionPanel.SetActive(false);
 			Debug.Log("Performing action on target pc");
 			playerActed(actingPlayer);
-			actingPlayer = -1;
+			//actingPlayer = -1;
 		}
 	}
 
@@ -134,8 +134,6 @@ public class BattleCanvasController : MonoBehaviour {
 			switch(action){
 				case(Action.attack):
 					AttackEnemy(enemyNum, actingPlayer);
-				
-					actingPlayer = -1;
 				break;
 				case(Action.skill):
 				break;
@@ -144,9 +142,11 @@ public class BattleCanvasController : MonoBehaviour {
 			}
 
 			selection = Selection.none;
+			action = Action.none;
 			actionPanel.SetActive(false);
 			Debug.Log("Performing action on target enemy");
 			playerActed(actingPlayer);
+			actingPlayer = -1;
 		}
 	}
 
