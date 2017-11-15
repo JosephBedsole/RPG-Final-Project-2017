@@ -13,10 +13,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Bad Jake
   LVL: 3
-  HP: 33
+  HP: 10
   MP: 0
   Guts: 0
   Spirit: 0
   CT: 10
   canAct: 0
   enemySprite: {fileID: 21300000, guid: 18127082a6b8b1b45b9a471cd9b7ba7a, type: 3}
+  pAttackStrength: 5
+  isKO: 0

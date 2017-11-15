@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Player", menuName = "RPG/Player")]
 public class PlayerCharacter : ScriptableObject {
 
+	//Base
 	public string characterName = "";
 	public int LVL = 1;
 	public int HP = 0;
@@ -15,9 +16,10 @@ public class PlayerCharacter : ScriptableObject {
 	public bool canAct = false;
 
 
-
+	//Combat
 	public int pAttackStrength = 5;
 
-
+	//Status
+	public bool isKO = false;
 
 }

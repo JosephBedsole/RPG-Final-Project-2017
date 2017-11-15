@@ -222,8 +222,27 @@ public class BattleCanvasController : MonoBehaviour {
 	}
 
 	void SetRandomEnemies(){
-		for(int i = 0; i < 3; i++){
+		for(int i = 0; i < 4; i++){
 			GameManager.instance.enemyList[i] = randomEnemyArr[Random.Range(0, randomEnemyArr.Length)];
+		}
+	}
+
+	void CheckHealth(){
+		for(int i = 0; i < GameManager.instance.enemyList.Count; i++){
+			if(GameManager.instance.enemyList[i].HP <= 0){
+				GameManager.instance.enemyList[i].isKO = true;
+			}
+			if(GameManager.instance.enemyList[i].isKO == true){
+				//Stop charging
+			}
+		}
+		for(int i = 0; i < GameManager.instance.pcList.Count; i++){
+			if(GameManager.instance.pcList[i].HP <= 0){
+				GameManager.instance.pcList[i].isKO = true;
+			}
+			if(GameManager.instance.pcList[i].isKO == true){
+				//Stop charging
+			}
 		}
 	}
 

@@ -13,10 +13,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Evil Ed
   LVL: 3
-  HP: 33
+  HP: 10
   MP: 0
   Guts: 0
   Spirit: 0
   CT: 10
   canAct: 0
   enemySprite: {fileID: 21300000, guid: 7f2b7301c781cf5428e53d5d9a408c77, type: 3}
+  pAttackStrength: 5
+  isKO: 0
