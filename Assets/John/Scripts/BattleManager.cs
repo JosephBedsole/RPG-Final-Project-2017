@@ -52,7 +52,6 @@ public class BattleManager : MonoBehaviour {
         UpdateCT();
     }
 
-
     public void SetStartChargeTime(float startCT){
         for (int i = 0; i < pcPanelList.Count; i++){
             GameObject ctTemp = pcPanelList[i].transform.Find("CT").gameObject;
@@ -103,7 +102,6 @@ public class BattleManager : MonoBehaviour {
     }
 
     public bool CanPCAct(int pcSheet){
-        return pcSheets[pcSheet].canAct;
-        
+        return pcSheets[pcSheet].canAct;  
     }
 }

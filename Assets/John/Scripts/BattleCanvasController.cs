@@ -30,13 +30,14 @@ public class BattleCanvasController : MonoBehaviour {
 
 	GameObject actionPanel;
 	GameObject enemyPanels;
-	GameObject enemySprites;	
 
 	int actingPlayer;
 
 	public List<GameObject> pcPanelList = new List<GameObject>();
 	public List<GameObject> enemyPanelList = new List<GameObject>();
 	public List<GameObject> actionPanelList = new List<GameObject>();
+	public List<GameObject> enemySpriteList = new List<GameObject>();
+	EnemyCharacter[] randomEnemyArr;
 	List<Image> ctList = new List<Image>(); // TODO: get cts onEnable instead of dragndrop
 	List<float> ctListSpeed = new List<float>();
 
@@ -67,11 +68,20 @@ public class BattleCanvasController : MonoBehaviour {
 		actionPanelList.Add(GameObject.Find("Attack"));
 		actionPanelList.Add(GameObject.Find("Skill"));
 		actionPanelList.Add(GameObject.Find("Item"));
+
+		enemySpriteList.Add(GameObject.Find("EnemySprite1"));
+		enemySpriteList.Add(GameObject.Find("EnemySprite2"));
+		enemySpriteList.Add(GameObject.Find("EnemySprite3"));
+		enemySpriteList.Add(GameObject.Find("EnemySprite4"));
+		
 	}
 
 	void Start(){
+		GetRandomEnemies();
+		SetRandomEnemies();
 		SetPlayerStatsUI();
 		SetEnemyStatsUI();
+		GetEnemySprites();
 	}
 
 	void Update(){
@@ -199,6 +209,26 @@ public class BattleCanvasController : MonoBehaviour {
 	void AttackEnemy(int target, int pc){
 		GameManager.instance.enemyList[target].HP -= GameManager.instance.pcList[pc].pAttackStrength;
 		SetEnemyStatsUI();
+	}
+
+	void GetEnemySprites(){
+		for(int i = 0; i < enemySpriteList.Count; i++){
+			enemySpriteList[i].GetComponent<Image>().sprite = GameManager.instance.enemyList[i].enemySprite;
+		}
+	}
+
+	void GetRandomEnemies(){
+		randomEnemyArr = Resources.FindObjectsOfTypeAll<EnemyCharacter>();
+	}
+
+	void SetRandomEnemies(){
+		for(int i = 0; i < 3; i++){
+			GameManager.instance.enemyList[i] = randomEnemyArr[Random.Range(0, randomEnemyArr.Length)];
+		}
+	}
+
+	T GetRand<T> (List<T> list) {
+		return list[Random.Range(0, list.Count)];
 	}
 
 }

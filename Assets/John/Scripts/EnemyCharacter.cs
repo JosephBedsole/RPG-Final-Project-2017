@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "Enemy", menuName = "RPG/Enemy") ]
 public class EnemyCharacter : ScriptableObject {
@@ -13,5 +14,7 @@ public class EnemyCharacter : ScriptableObject {
 	public int Spirit = 0;
 	public int CT = 10;
 	public bool canAct = false; 
+
+	public Sprite enemySprite;
 	
 }
