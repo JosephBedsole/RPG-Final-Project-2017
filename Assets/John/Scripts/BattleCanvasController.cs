@@ -177,9 +177,9 @@ public class BattleCanvasController : MonoBehaviour {
            GameObject tempLevel = GetPlayerAttributeUI(currentPanel, "Level");
 		   tempLevel.GetComponent<Text>().text = "LVL: " + GameManager.instance.pcList[i].LVL.ToString();
 		   GameObject tempHP = GetPlayerAttributeUI(currentPanel, "HP");
-		   tempHP.GetComponent<Text>().text = "HP" + GameManager.instance.pcList[i].HP.ToString();
+		   tempHP.GetComponent<Text>().text = "HP" + GameManager.instance.pcList[i].currHP.ToString();
 		   GameObject tempMP = GetPlayerAttributeUI(currentPanel, "MP");
-		   tempMP.GetComponent<Text>().text = "MP" + GameManager.instance.pcList[i].MP.ToString();
+		   tempMP.GetComponent<Text>().text = "MP" + GameManager.instance.pcList[i].currMP.ToString();
        }
     }
 
@@ -196,9 +196,9 @@ public class BattleCanvasController : MonoBehaviour {
 			GameObject tempLevel = GetEnemyAttributeUI(currentPanel, "Level");
 			tempLevel.GetComponent<Text>().text = "Level: " + GameManager.instance.enemyList[i].LVL.ToString();
 			GameObject tempHP = GetEnemyAttributeUI(currentPanel, "HP");
-			tempHP.GetComponent<Text>().text = "HP: " + GameManager.instance.enemyList[i].HP.ToString();
+			tempHP.GetComponent<Text>().text = "HP: " + GameManager.instance.enemyList[i].currHP.ToString();
 			GameObject tempMP = GetEnemyAttributeUI(currentPanel, "MP");
-			tempMP.GetComponent<Text>().text = "MP: " + GameManager.instance.enemyList[i].MP.ToString();
+			tempMP.GetComponent<Text>().text = "MP: " + GameManager.instance.enemyList[i].currMP.ToString();
 		}
 	}
 
@@ -207,7 +207,7 @@ public class BattleCanvasController : MonoBehaviour {
 	}
 
 	void AttackEnemy(int target, int pc){
-		GameManager.instance.enemyList[target].HP -= GameManager.instance.pcList[pc].pAttackStrength;
+		GameManager.instance.enemyList[target].currHP -= GameManager.instance.pcList[pc].pAttackStrength;
 		SetEnemyStatsUI();
 	}
 
@@ -229,7 +229,7 @@ public class BattleCanvasController : MonoBehaviour {
 
 	void CheckHealth(){
 		for(int i = 0; i < GameManager.instance.enemyList.Count; i++){
-			if(GameManager.instance.enemyList[i].HP <= 0){
+			if(GameManager.instance.enemyList[i].currHP <= 0){
 				GameManager.instance.enemyList[i].isKO = true;
 			}
 			if(GameManager.instance.enemyList[i].isKO == true){
@@ -237,11 +237,12 @@ public class BattleCanvasController : MonoBehaviour {
 			}
 		}
 		for(int i = 0; i < GameManager.instance.pcList.Count; i++){
-			if(GameManager.instance.pcList[i].HP <= 0){
+			if(GameManager.instance.pcList[i].currHP <= 0){
 				GameManager.instance.pcList[i].isKO = true;
 			}
 			if(GameManager.instance.pcList[i].isKO == true){
 				//Stop charging
+
 			}
 		}
 	}

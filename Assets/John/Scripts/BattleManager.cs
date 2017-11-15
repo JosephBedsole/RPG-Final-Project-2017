@@ -63,7 +63,7 @@ public class BattleManager : MonoBehaviour {
         for (int i = 0; i < pcPanelList.Count; i++){
             GameObject ctTemp = pcPanelList[i].transform.Find("CT").gameObject;
             if(ctTemp.GetComponent<Image>().fillAmount < 1.0f){
-                ctTemp.GetComponent<Image>().fillAmount += BASE_CT_CHARGE + (float)pcSheets[i].CT/1000;
+                ctTemp.GetComponent<Image>().fillAmount += BASE_CT_CHARGE + (float)pcSheets[i].currCT/1000;
             }
             else{
                 pcSheets[i].canAct = true;
