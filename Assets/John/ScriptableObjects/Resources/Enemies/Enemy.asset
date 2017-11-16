@@ -13,12 +13,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: BadMan
   LVL: 1
-  HP: 10
-  MP: 0
-  Guts: 0
-  Spirit: 0
-  CT: 10
-  canAct: 0
+  baseHP: 0
+  currHP: 10
+  maxHP: 0
+  baseMP: 0
+  currMP: 0
+  maxMP: 0
+  baseGuts: 0
+  currGuts: 0
+  maxGuts: 0
+  baseSpirit: 0
+  currSpirit: 0
+  maxSpirit: 0
+  baseCT: 1
+  currCT: 1
+  maxCT: 1
   enemySprite: {fileID: 21300000, guid: 96a93a6c0e3764f48b39f0abf6edb2fc, type: 3}
   pAttackStrength: 5
+  canAct: 1
   isKO: 0

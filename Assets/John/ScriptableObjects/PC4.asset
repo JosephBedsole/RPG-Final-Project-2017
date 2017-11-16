@@ -13,10 +13,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   LVL: 1
-  HP: 200
-  MP: 50
-  Guts: 8
-  Spirit: 0
-  CT: 12
+  baseHP: 1
+  currHP: 1
+  maxHP: 1
+  baseMP: 1
+  currMP: 1
+  maxMP: 1
+  baseGuts: 1
+  currGuts: 1
+  maxGuts: 1
+  baseSpirit: 1
+  currSpirit: 1
+  maxSpirit: 1
+  baseCT: 1
+  currCT: 1
+  maxCT: 1
+  pAttackStrength: 30
   canAct: 1
-  pAttackStrength: 8
+  isKO: 0

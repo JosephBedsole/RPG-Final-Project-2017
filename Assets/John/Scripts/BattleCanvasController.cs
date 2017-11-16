@@ -91,6 +91,8 @@ public class BattleCanvasController : MonoBehaviour {
 			else
 				pcPanelList[i].GetComponent<Image>().color = new Color(1,1,1,1.0f);
 		}
+		CheckHealth();
+		CheckWin();
 	}
 
 	public void ButtonClicked(string s){
@@ -177,9 +179,9 @@ public class BattleCanvasController : MonoBehaviour {
            GameObject tempLevel = GetPlayerAttributeUI(currentPanel, "Level");
 		   tempLevel.GetComponent<Text>().text = "LVL: " + GameManager.instance.pcList[i].LVL.ToString();
 		   GameObject tempHP = GetPlayerAttributeUI(currentPanel, "HP");
-		   tempHP.GetComponent<Text>().text = "HP" + GameManager.instance.pcList[i].currHP.ToString();
+		   tempHP.GetComponent<Text>().text = "HP: " + GameManager.instance.pcList[i].currHP.ToString();
 		   GameObject tempMP = GetPlayerAttributeUI(currentPanel, "MP");
-		   tempMP.GetComponent<Text>().text = "MP" + GameManager.instance.pcList[i].currMP.ToString();
+		   tempMP.GetComponent<Text>().text = "MP: " + GameManager.instance.pcList[i].currMP.ToString();
        }
     }
 
@@ -219,32 +221,44 @@ public class BattleCanvasController : MonoBehaviour {
 
 	void GetRandomEnemies(){
 		randomEnemyArr = Resources.FindObjectsOfTypeAll<EnemyCharacter>();
+
+		
 	}
 
 	void SetRandomEnemies(){
-		for(int i = 0; i < 4; i++){
-			GameManager.instance.enemyList[i] = randomEnemyArr[Random.Range(0, randomEnemyArr.Length)];
+		for(int i = 0; i < GameManager.instance.enemyList.Count; i++){
+			EnemyCharacter newEnemy = Instantiate(randomEnemyArr[Random.Range(0, randomEnemyArr.Length)]);
+			GameManager.instance.enemyList[i] = newEnemy;
 		}
 	}
 
 	void CheckHealth(){
 		for(int i = 0; i < GameManager.instance.enemyList.Count; i++){
-			if(GameManager.instance.enemyList[i].currHP <= 0){
+			if(GameManager.instance.enemyList[i].currHP <= 0.0f){
 				GameManager.instance.enemyList[i].isKO = true;
 			}
 			if(GameManager.instance.enemyList[i].isKO == true){
-				//Stop charging
+				BattleManager.instance.pcCT[i] = 0.0f;
 			}
 		}
 		for(int i = 0; i < GameManager.instance.pcList.Count; i++){
-			if(GameManager.instance.pcList[i].currHP <= 0){
+			if(GameManager.instance.pcList[i].currHP <= 0.0f){
 				GameManager.instance.pcList[i].isKO = true;
 			}
 			if(GameManager.instance.pcList[i].isKO == true){
-				//Stop charging
-
+				BattleManager.instance.enemyCT[i] = 0.0f;
 			}
 		}
+	}
+
+	void CheckWin(){
+		EnemyCharacter pc = GameManager.instance.enemyList.Find((g) => !g.isKO);
+		if(pc == null) Debug.Log("Player Wins!!!!");
+	}
+
+	void CheckLose(){
+		PlayerCharacter pc = GameManager.instance.pcList.Find((g) => g.isKO);
+		if(pc == null) Debug.Log("Player Wins!!!!");
 	}
 
 	T GetRand<T> (List<T> list) {

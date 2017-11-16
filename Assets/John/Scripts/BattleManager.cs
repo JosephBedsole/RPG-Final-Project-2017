@@ -14,6 +14,11 @@ public class BattleManager : MonoBehaviour {
     float MINCT = 0.0f;
     public float BASE_CT_CHARGE = 0.00001f;
 
+    [HideInInspector]
+    public float[] pcCT = {0.0f,0.0f,0.0f,0.0f};
+    [HideInInspector]
+    public float[] enemyCT = {0.0f, 0.0f, 0.0f, 0.0f};
+
     List<GameObject> pcPanelList = new List<GameObject>();
     List<GameObject> enemyPanelList = new List<GameObject>();
     List<PlayerCharacter> _pcSheets = new List<PlayerCharacter>();
@@ -64,9 +69,21 @@ public class BattleManager : MonoBehaviour {
             GameObject ctTemp = pcPanelList[i].transform.Find("CT").gameObject;
             if(ctTemp.GetComponent<Image>().fillAmount < 1.0f){
                 ctTemp.GetComponent<Image>().fillAmount += BASE_CT_CHARGE + (float)pcSheets[i].currCT/1000;
+                pcCT[i] += BASE_CT_CHARGE + (float)pcSheets[i].currCT/1000; // TODO, replace image scale stuff with this
             }
             else{
                 pcSheets[i].canAct = true;
+            }
+        }
+
+        for(int i = 0; i < enemyPanelList.Count; i++){
+            if(enemyCT[i] < 1.0f){
+                enemyCT[i] += BASE_CT_CHARGE + (float)GameManager.instance.enemyList[i].currCT/1000;
+                Debug.Log("updating enemy CT");
+            }
+            else{
+                GameManager.instance.enemyList[i].canAct = true;
+                Debug.Log(GameManager.instance.enemyList[i].characterName + " can act!");
             }
         }
     }
@@ -76,21 +93,25 @@ public class BattleManager : MonoBehaviour {
         if(playerNum == 0){
             GameObject ctTemp = pcPanelList[0].transform.Find("CT").gameObject;
             ctTemp.GetComponent<Image>().fillAmount = 0.0f;
+            pcCT[0] = 0.0f;
             pcSheets[0].canAct = false;
         }
         else if(playerNum == 1){
             GameObject ctTemp = pcPanelList[1].transform.Find("CT").gameObject;
             ctTemp.GetComponent<Image>().fillAmount = 0.0f;
+            pcCT[0] = 0.0f;
             pcSheets[1].canAct = false;    
         }
         else if(playerNum == 2){
             GameObject ctTemp = pcPanelList[2].transform.Find("CT").gameObject;
             ctTemp.GetComponent<Image>().fillAmount = 0.0f;
+            pcCT[0] = 0.0f;            
             pcSheets[2].canAct = false; 
          }
         else if(playerNum == 3){
             GameObject ctTemp = pcPanelList[3].transform.Find("CT").gameObject;
             ctTemp.GetComponent<Image>().fillAmount = 0.0f;
+            pcCT[0] = 0.0f;            
             pcSheets[3].canAct = false;        
          }
     }
