@@ -10,6 +10,7 @@ public class ChestController : MonoBehaviour {
 
 	public Items[] chestContents;
 
+	// Make this an OnMouseClick Function so the player can just click on the item when within a specific area;
 	public void HandOverItems ()
 	{
 		if (active && !locked)
