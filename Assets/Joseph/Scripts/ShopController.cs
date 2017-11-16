@@ -16,7 +16,9 @@ public class ShopController : MonoBehaviour {
 	public int itemCost;
 
 	[Header("Menus")]
+	public Transform shopButton;
 	public Transform shopMenu;
+	public Transform shopSelect;
 	public Transform buyMenu;
 	public Transform sellMenu;
 
@@ -37,48 +39,61 @@ public class ShopController : MonoBehaviour {
 
 	void Update () 
 	{
-		
+		DisplayShopButton();
 	}
 
 
 	// ------- Forward Navigation -------
 
-	void DisplayShop ()
+
+	public void DisplayShopButton ()
+	{
+		if (nearShop)
+		{
+			shopButton.gameObject.SetActive(true);
+		}
+		else
+		{
+			shopButton.gameObject.SetActive(false);
+		}
+	}
+
+	public void DisplayShop ()
 	{
 		inShopMenu = true;
 		shopMenu.gameObject.SetActive(true);
 	}
 
-	void DisplayPInv ()   // This is the Player Inventory Display Function
+	public void DisplaySellMenu ()   // This is the Player Inventory Display Function
 	{
 		inBuyMenu = true;
-		shopMenu.gameObject.SetActive(false);
+		shopSelect.gameObject.SetActive(false);
 		sellMenu.gameObject.SetActive(true);
 	}
 
-	void DisplayShopInv ()
+	public void DisplayBuyMenu ()
 	{
 		inSellMenu = true;
-		shopMenu.gameObject.SetActive(false);
+		shopSelect.gameObject.SetActive(false);
 		buyMenu.gameObject.SetActive(true);
 	}
 
 
 	// ------- Backward Navigation -------
 
-	void CloseShop ()
+	public void CloseShop ()
 	{
 		inShopMenu = false;
 		shopMenu.gameObject.SetActive(false);
 	}
 
-	void ClosePInv ()   // This is the Player Inventory Display Function
+	public void ClosePInv ()   // This is the Player Inventory Display Function
 	{
 		inBuyMenu = false;
 		sellMenu.gameObject.SetActive(false);
 	}
 
-	void CloseShopInv ()
+	public void CloseShopInv ()
 	{
 		inSellMenu = false;
 		buyMenu.gameObject.SetActive(false);
@@ -87,7 +102,7 @@ public class ShopController : MonoBehaviour {
 
 	// ------- Functions -------
 
-	void BuyItem ()
+	public void BuyItem ()
 	{
 		// Subtract gold amount
 		if (PlayerInventory.instance.gold >= itemCost)
@@ -106,7 +121,7 @@ public class ShopController : MonoBehaviour {
 		}
 	}
 
-	void SellItem ()
+	public void SellItem ()
 	{
 		// display: "Are you sure?" YES || NO 
 		if (true)

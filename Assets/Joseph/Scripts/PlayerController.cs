@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
 
 	public Vector3 offset = new Vector3(0, 0, -10);
 
+	ChestController chest;
+
 	Rigidbody2D body;
 
 	void Start ()
@@ -61,6 +63,46 @@ public class PlayerController : MonoBehaviour {
 
 		// offset = newXOffset + newYOffset;
 
+	}
+
+	public void OpenChest ()
+	{
+		if (chest.active)
+		{
+			chest.HandOverItems();
+			// Call a display items script from the ChestController as well;
+			chest.active = false;
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D c)
+	{
+		if (c.gameObject.tag == "Shop")
+		{
+			ShopController.instance.nearShop = true;
+		}
+
+		if (c.gameObject.tag == "Chest")
+		{
+			chest = c.gameObject.GetComponent<ChestController>();
+			if (chest.active)
+			{
+				MenuController.instance.chestPrompt.gameObject.SetActive(true);
+			}
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D c)
+	{
+		if (c.gameObject.tag == "Shop")
+		{
+			ShopController.instance.nearShop = false;
+		}
+
+		if (c.gameObject.tag == "Chest")
+		{
+			MenuController.instance.chestPrompt.gameObject.SetActive(false);
+		}
 	}
 
 

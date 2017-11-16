@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour {
+	public static MenuController instance;
+
 
 	[Header("Menus")]
 	public Transform taskMenu;
@@ -19,6 +21,7 @@ public class MenuController : MonoBehaviour {
 
 	[Header("Prompts")]
 	public Transform quitPrompt;
+	public Transform chestPrompt;
 
     public TempCharacter characterSelected; // How will this be set to null again?
 
@@ -29,7 +32,13 @@ public class MenuController : MonoBehaviour {
 	public bool inEquipmentMenu;
 	public bool inEquipItemMenu;
 
-
+	void Awake ()
+	{
+		if (instance == null)
+		{
+			instance = this;
+		}
+	}
 
 	void Update ()
 	{
@@ -194,13 +203,6 @@ public class MenuController : MonoBehaviour {
 
 	public void DisplayStats (string itemType) // Items item
 	{
-		// Rmv This later
-		// cImage.sprite = PlayerInventory.instance.item.uiSprite.sprite;
-		// cEquipName.text = PlayerInventory.instance.item.name;
-		// cDamage.text = "Damage: " + PlayerInventory.instance.item.minDamage + " - " + PlayerInventory.instance.item.maxDamage;
-		// cSpeed.text = "Speed: " + PlayerInventory.instance.item.speed;
-		// cCrit.text = "Crit: " + PlayerInventory.instance.item.crit;
-		// cHealth.text = "Health: " + PlayerInventory.instance.item.health;
 
 		if (itemType == "weapon")
 		{
@@ -239,7 +241,7 @@ public class MenuController : MonoBehaviour {
 
 		// Sets the scriptable object's stuff to the menu's stuff...  stuuuuuuuuuff
 	}
-
+	
 	public void EquipItemMenu ()
 	{
 		// Current Item Stats from current scriptable object

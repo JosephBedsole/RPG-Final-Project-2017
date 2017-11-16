@@ -17,6 +17,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	[Header("Inventory Items")]
 	public Items[] items;
+	public List<Items> itemz = new List<Items>();
 
 	public Items item;
 
@@ -34,8 +35,9 @@ public class PlayerInventory : MonoBehaviour {
 
 	}
 
-	void AddItem ()   // This will Add an Item from other sources to the PlayerInventory
+	public void AddItem (Items newItem)   // This will Add an Item from other sources to the PlayerInventory
 	{
+		itemz.Add(newItem);
 		// Call this when buying an item from the shop, opening a chest, or looting an item from battle
 
 		// if (isInShop)    then you should have some sort of exchange of gold
@@ -65,8 +67,6 @@ public class PlayerInventory : MonoBehaviour {
 		// else
 		// Display: "You can't equip that class of weapon."
 	}
-
-
 
 
 
