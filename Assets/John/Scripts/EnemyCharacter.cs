@@ -32,5 +32,6 @@ public class EnemyCharacter : ScriptableObject {
 
 	//Status
 	public bool canAct = false; 
+	public bool isWaiting = false;
 	public bool isKO = false;
 }

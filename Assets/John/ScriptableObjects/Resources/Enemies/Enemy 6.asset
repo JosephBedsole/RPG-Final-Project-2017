@@ -30,5 +30,6 @@ MonoBehaviour:
   maxCT: 1
   enemySprite: {fileID: 21300000, guid: 7f2b7301c781cf5428e53d5d9a408c77, type: 3}
   pAttackStrength: 5
-  canAct: 1
+  canAct: 0
+  isWaiting: 1
   isKO: 0

@@ -43,13 +43,18 @@ public class BattleManager : MonoBehaviour {
         BattleCanvasController.playerActed -= ResetChargeTime;
     }
 
-    void Start(){
+    IEnumerator Start(){
         pcPanelList.AddRange(BattleCanvasController.instance.pcPanelList);
         enemyPanelList.AddRange(BattleCanvasController.instance.enemyPanelList);
         pcSheets.AddRange(GameManager.instance.pcList);
         enemySheets.AddRange(GameManager.instance.enemyList);
         SetPartyAct(false);
         SetStartChargeTime(0.0f);
+
+        yield return new WaitForEndOfFrame();
+        for(int i = 0; i < GameManager.instance.enemyList.Count; i++){
+            GameManager.instance.enemyList[i].isWaiting = true;
+        }
 
     }
 
@@ -76,14 +81,16 @@ public class BattleManager : MonoBehaviour {
             }
         }
 
-        for(int i = 0; i < enemyPanelList.Count; i++){
-            if(enemyCT[i] < 1.0f){
-                enemyCT[i] += BASE_CT_CHARGE + (float)GameManager.instance.enemyList[i].currCT/1000;
-                Debug.Log("updating enemy CT");
+        for(int i = 0; i < GameManager.instance.enemyList.Count; i++){
+            if(enemyCT[i] < 1.0f && GameManager.instance.enemyList[i].isWaiting){
+                enemyCT[i] += BASE_CT_CHARGE + (float)GameManager.instance.enemyList[i].currCT / 1000f;
+                if (i == 0) Debug.Log("updating enemy CT: " + enemyCT[i]);
             }
-            else{
+            else if(enemyCT[i] >= 1.0f && GameManager.instance.enemyList[i].isWaiting){
+                GameManager.instance.enemyList[i].isWaiting = false;
                 GameManager.instance.enemyList[i].canAct = true;
                 Debug.Log(GameManager.instance.enemyList[i].characterName + " can act!");
+                BattleCanvasController.instance.actionQueue.Enqueue(BattleCanvasController.instance.EnemyAttackPCs(i));
             }
         }
     }

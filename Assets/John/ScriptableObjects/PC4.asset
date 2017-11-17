@@ -14,7 +14,7 @@ MonoBehaviour:
   characterName: 
   LVL: 1
   baseHP: 1
-  currHP: 1
+  currHP: 100
   maxHP: 1
   baseMP: 1
   currMP: 1
@@ -30,4 +30,4 @@ MonoBehaviour:
   maxCT: 1
   pAttackStrength: 30
   canAct: 1
-  isKO: 0
+  isKO: 1

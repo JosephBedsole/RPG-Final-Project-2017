@@ -37,6 +37,9 @@ public class BattleCanvasController : MonoBehaviour {
 	public List<GameObject> enemyPanelList = new List<GameObject>();
 	public List<GameObject> actionPanelList = new List<GameObject>();
 	public List<GameObject> enemySpriteList = new List<GameObject>();
+
+	public Queue<IEnumerator> actionQueue = new Queue<IEnumerator>();
+
 	EnemyCharacter[] randomEnemyArr;
 	List<Image> ctList = new List<Image>(); // TODO: get cts onEnable instead of dragndrop
 	List<float> ctListSpeed = new List<float>();
@@ -73,6 +76,8 @@ public class BattleCanvasController : MonoBehaviour {
 		enemySpriteList.Add(GameObject.Find("EnemySprite2"));
 		enemySpriteList.Add(GameObject.Find("EnemySprite3"));
 		enemySpriteList.Add(GameObject.Find("EnemySprite4"));
+
+		StartCoroutine("ActionBuffer");
 		
 	}
 
@@ -91,6 +96,13 @@ public class BattleCanvasController : MonoBehaviour {
 			else
 				pcPanelList[i].GetComponent<Image>().color = new Color(1,1,1,1.0f);
 		}
+		for(int i = 0; i < 4; i++)//{
+			if(BattleManager.instance.enemySheets[i].canAct == false)
+				//enemyPanelList[i].GetComponent<Image>().color = new Color(1,1,1,0.1f);
+			//else
+				//enemyPanelList[i].GetComponent<Image>().color = new Color(1,1,1,1.0f);
+		//}
+
 		CheckHealth();
 		CheckWin();
 	}
@@ -213,6 +225,21 @@ public class BattleCanvasController : MonoBehaviour {
 		SetEnemyStatsUI();
 	}
 
+	public IEnumerator EnemyAttackPCs(int enemy){
+		enemyPanelList[enemy].GetComponent<Image>().color = new Color(1,0,0,1.0f);
+		yield return new WaitForSeconds(1.0f);
+		GameManager.instance.pcList[Random.Range(0,4)].currHP -= GameManager.instance.enemyList[enemy].pAttackStrength;
+		Debug.Log(GameManager.instance.enemyList[enemy] +  " attacks!");
+		enemyPanelList[enemy].GetComponent<Image>().color = new Color(1,1,1,0.1f);
+
+		GameManager.instance.enemyList[enemy].canAct = false;
+		GameManager.instance.enemyList[enemy].isWaiting = true;
+		BattleManager.instance.enemyCT[enemy] = 0.0f;
+
+		SetEnemyStatsUI();
+		SetPlayerStatsUI();
+	}
+
 	void GetEnemySprites(){
 		for(int i = 0; i < enemySpriteList.Count; i++){
 			enemySpriteList[i].GetComponent<Image>().sprite = GameManager.instance.enemyList[i].enemySprite;
@@ -238,7 +265,7 @@ public class BattleCanvasController : MonoBehaviour {
 				GameManager.instance.enemyList[i].isKO = true;
 			}
 			if(GameManager.instance.enemyList[i].isKO == true){
-				BattleManager.instance.pcCT[i] = 0.0f;
+				BattleManager.instance.enemyCT[i] = 0.0f;
 			}
 		}
 		for(int i = 0; i < GameManager.instance.pcList.Count; i++){
@@ -246,7 +273,7 @@ public class BattleCanvasController : MonoBehaviour {
 				GameManager.instance.pcList[i].isKO = true;
 			}
 			if(GameManager.instance.pcList[i].isKO == true){
-				BattleManager.instance.enemyCT[i] = 0.0f;
+				BattleManager.instance.pcCT[i] = 0.0f;
 			}
 		}
 	}
@@ -265,4 +292,12 @@ public class BattleCanvasController : MonoBehaviour {
 		return list[Random.Range(0, list.Count)];
 	}
 
+	IEnumerator ActionBuffer(){
+		while(enabled){
+			while(actionQueue.Count > 0){
+				yield return StartCoroutine(actionQueue.Dequeue());
+			}
+			yield return new WaitForEndOfFrame();
+		}
+	}
 }
