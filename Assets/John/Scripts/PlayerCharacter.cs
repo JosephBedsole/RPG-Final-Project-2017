@@ -24,6 +24,8 @@ public class PlayerCharacter : ScriptableObject {
 	public int currCT = 1;
 	public int maxCT = 1;
 
+	public int XP = 0;
+
 	//Combat
 	public int pAttackStrength = 5;
 

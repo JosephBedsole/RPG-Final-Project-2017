@@ -8,3 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/John/Scenes/BattleScene.unity
     guid: 9034e601f1ebf9e4196025c3e870b930
+  - enabled: 1
+    path: Assets/John/Scenes/VictoryScene.unity
+    guid: 60f5eafc58e2c9b4d978f7c5319f2626

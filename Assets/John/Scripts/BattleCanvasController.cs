@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BattleCanvasController : MonoBehaviour {
 
 	public static BattleCanvasController instance = null;
 
+	public string postBattleScene;
 	public GameObject pointer;
 	public Image ct1;
 	public Image ct2;
@@ -280,7 +282,10 @@ public class BattleCanvasController : MonoBehaviour {
 
 	void CheckWin(){
 		EnemyCharacter pc = GameManager.instance.enemyList.Find((g) => !g.isKO);
-		if(pc == null) Debug.Log("Player Wins!!!!");
+		if(pc == null){
+			Debug.Log("Player Wins!!!!");
+			SceneManager.LoadScene(postBattleScene);
+		} 
 	}
 
 	void CheckLose(){
