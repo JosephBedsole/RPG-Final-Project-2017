@@ -9,12 +9,20 @@ public class ChestController : MonoBehaviour {
 	public bool locked = false;
 
 	public Items[] chestContents;
+	public int goldToGive = 10;
 
-	// Make this an OnMouseClick Function so the player can just click on the item when within a specific area;
+	// Make this an OnMouseClick Function so the player can just click on the chest when within a specific area;
+
+	void Start ()
+	{
+		goldToGive = Random.Range(1, 10); // Can I make this a function that is called from a different script?
+	}
+
 	public void HandOverItems ()
 	{
 		if (active && !locked)
 		{
+			PlayerInventory.instance.gold += goldToGive;
 			for (int i = 0; i < chestContents.Length; ++i)
 			{
 				Items newItem = chestContents[i];

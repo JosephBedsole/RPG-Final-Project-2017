@@ -12,6 +12,7 @@ public class DisplayInventory : MonoBehaviour {
 	public Transform slot;
 	public Transform slotDefault;
 	public RectTransform parent;
+	float parentSize = 60;
 
 	[Header("Inventory Item Stats")]
 	public Image iImage;
@@ -41,7 +42,13 @@ public class DisplayInventory : MonoBehaviour {
 
 	public void Display ()
 	{
-		// Figure out how to set the button positions to the correct spots
+		// Figure out how to set the button positions to the correct spots (Done: now do it better);
+
+		// NEED A INVENTORY CLEAR FUNCTION;
+		// everytime the player exits an inventory screen;
+		// Should put all of the buttons into a List;
+		// Then clear the list and reset the parentSize to 60;
+		// Could just set the parentSize to 60 and not clear the List;
 		
 		Transform prevSlot = slotDefault;
 		Vector3 offset = new Vector3(0 , yOffset, 0);
@@ -52,7 +59,15 @@ public class DisplayInventory : MonoBehaviour {
 			newSlot.gameObject.SetActive(true);
 			newSlot.SetParent(parent);
 			newSlot.localScale = new Vector3(1, 1, 1);
-			newSlot.transform.position = prevSlot.transform.position - offset;
+
+			if (i == 0)
+			{
+				newSlot.transform.position = prevSlot.transform.position;
+			}
+			else
+			{
+				newSlot.transform.position = prevSlot.transform.position - offset;
+			}
 
 			Items item = PlayerInventory.instance.itemz[i];
 			Button newItem = newSlot.GetComponent<Button>();
@@ -65,6 +80,11 @@ public class DisplayInventory : MonoBehaviour {
 
 			Image sprite = newSlot.transform.Find("Item Sprite").GetComponent<Image>();
 			sprite.sprite = item.uiSprite.sprite;
+
+			parentSize += 60.0f;
+
+			RectTransform parentRect = parent.GetComponent<RectTransform>();
+			parentRect.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0.0f, parentSize);
 
 			// set height of parent;
 			prevSlot = newSlot;

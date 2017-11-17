@@ -8,12 +8,12 @@ using UnityEngine.UI;
 public class Items : ScriptableObject {
 
 	public string itemName;
-
 	public string itemTag;
-
+	public int buyValue;
+	public int sellValue;
 	public Image uiSprite;       // For the Inventory screen;
 
-	[Header("Nerd Stuff")]
+	[Header("Stat Stuff")]
 	public Image damageTypeSprite;
 	public string damageType;
 	public int minDamage;

@@ -87,33 +87,40 @@ public class ShopController : MonoBehaviour {
 		shopMenu.gameObject.SetActive(false);
 	}
 
-	public void ClosePInv ()   // This is the Player Inventory Display Function
+	public void ClosePlayerInv ()   // This is the Player Inventory Display Function
 	{
 		inBuyMenu = false;
+		shopSelect.gameObject.SetActive(true);
 		sellMenu.gameObject.SetActive(false);
 	}
 
 	public void CloseShopInv ()
 	{
 		inSellMenu = false;
+		shopSelect.gameObject.SetActive(true);
 		buyMenu.gameObject.SetActive(false);
 	}
 
 
 	// ------- Functions -------
 
-	public void BuyItem ()
+
+
+	// Directly Code BuyItem with a scriptable object as a perameter like the DisplayInventoryStats(Items item) from the DisplayInventoryScript;
+
+	public void BuyItem (Items item) 
 	{
 		// Subtract gold amount
 		if (PlayerInventory.instance.gold >= itemCost)
 		{
-			// subtract gold
-			// add item to the player inventory
+			PlayerInventory.instance.gold -= item.buyValue;
+			PlayerInventory.instance.AddItem(item); // add item to the player inventory;
 		}
 		else if (PlayerInventory.instance.gold < itemCost)
 		{
 			// gray out the buy button
 			// display: "You don't have enough gold."
+			Debug.Log("You don't have enough gold!");
 		}
 		else
 		{
@@ -121,13 +128,13 @@ public class ShopController : MonoBehaviour {
 		}
 	}
 
-	public void SellItem ()
+	public void SellItem (Items item) 
 	{
 		// display: "Are you sure?" YES || NO 
 		if (true)
 		{
 			// remove item from the player inventory
-			// add the sell gold to the player inventory
+			PlayerInventory.instance.gold += item.sellValue;
 		}
 		else
 		{

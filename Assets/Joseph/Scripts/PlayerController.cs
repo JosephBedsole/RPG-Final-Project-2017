@@ -71,7 +71,10 @@ public class PlayerController : MonoBehaviour {
 		{
 			chest.HandOverItems();
 			// Call a display items script from the ChestController as well;
+
+			MenuController.instance.chestPrompt.gameObject.SetActive(false);
 			chest.active = false;
+			
 		}
 	}
 
@@ -80,6 +83,13 @@ public class PlayerController : MonoBehaviour {
 		if (c.gameObject.tag == "Shop")
 		{
 			ShopController.instance.nearShop = true;
+		}
+
+		if (c.gameObject.tag == "Portal")
+		{
+			// Display do you want to enter
+			// or
+			// Just transition
 		}
 
 		if (c.gameObject.tag == "Chest")
