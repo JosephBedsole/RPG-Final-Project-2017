@@ -13,13 +13,13 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 
+	public int gold = 0;
+
 	[Header("Inventory Items")]
 	public Items[] items;
+	public List<Items> itemz = new List<Items>();
 
 	public Items item;
-
-
-
 
 	[Header("Item Visualization")]
 	public Transform[] inventorySlots; 
@@ -33,31 +33,11 @@ public class PlayerInventory : MonoBehaviour {
 	void Update () 
 	{
 
-		// if (Input.GetButton("Jump"))
-		// {
-		// 	TempCharacter.instance.mainHand = weapons[0];
-		// 	// Disable the menu
-		// 	// Display sub menu with Equip / Move / Drop
-		// 	if (Input.GetButton("Jump"))
-		// 	{
-		// 		// Use the event system to call one of the functions
-		// 		// Hide the sub menu
-		// 		//Enable the menu
-		// 	}
-		// 	else if (Input.GetButton("Fire1"))
-		// 	{
-		// 		// Hide the sub menu
-		// 		// Enable the menu
-		// 	}
-		// }
-		// else if (Input.GetButton("Fire1"))
-		// {
-		// 	// Close Inventory
-		// }
 	}
 
-	void AddItem ()   // This will Add an Item from other sources to the PlayerInventory
+	public void AddItem (Items newItem)   // This will Add an Item from other sources to the PlayerInventory
 	{
+		itemz.Add(newItem);
 		// Call this when buying an item from the shop, opening a chest, or looting an item from battle
 
 		// if (isInShop)    then you should have some sort of exchange of gold
@@ -87,8 +67,6 @@ public class PlayerInventory : MonoBehaviour {
 		// else
 		// Display: "You can't equip that class of weapon."
 	}
-
-
 
 
 

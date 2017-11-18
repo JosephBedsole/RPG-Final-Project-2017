@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour {
+	public static MenuController instance;
+
 
 	[Header("Menus")]
+	public Transform taskMenu;
 	public Transform menu;
 	public Transform menuSelect;
 	public Transform inventoryMenu;
@@ -18,39 +21,55 @@ public class MenuController : MonoBehaviour {
 
 	[Header("Prompts")]
 	public Transform quitPrompt;
+	public Transform chestPrompt;
 
     public TempCharacter characterSelected; // How will this be set to null again?
 
     [Header("Menu bools")]
+	public bool waitTime;
 	public bool inMenuSelect;
 	public bool inSecondTierMenus;
 	public bool inEquipmentMenu;
 	public bool inEquipItemMenu;
 
-
+	void Awake ()
+	{
+		if (instance == null)
+		{
+			instance = this;
+		}
+	}
 
 	void Update ()
 	{
 		// View menu after a key is pressed
-		if (Input.GetKey(KeyCode.Escape) && (!inMenuSelect && !inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu))
+		if (Input.GetKey(KeyCode.E) && (!ShopController.instance.inShopMenu && !inMenuSelect && !inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu) && !waitTime)
 		{
 			OpenMenu();
+			StartCoroutine("BufferTime");
 		}
-		else if (Input.GetKey(KeyCode.Escape) && (inMenuSelect && !inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu)) // Exit during equipping stage?
+
+
+
+		if (Input.GetKey(KeyCode.Escape) && (inMenuSelect && !inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu) && !waitTime) // Exit during equipping stage?
 		{
 			CloseMenu();
+			StartCoroutine("BufferTime");
 		}
-        else if (Input.GetKey(KeyCode.Escape) && (inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu))
+        else if (Input.GetKey(KeyCode.Escape) && (inSecondTierMenus && !inEquipmentMenu && !inEquipItemMenu) && !waitTime)
 		{
 			ReturnToMenuSelect();
+			StartCoroutine("BufferTime");
 		}
-		else if (Input.GetKey(KeyCode.Escape) && (inEquipmentMenu && !inEquipItemMenu))
+		else if (Input.GetKey(KeyCode.Escape) && (inEquipmentMenu && !inEquipItemMenu) && !waitTime)
 		{
 			ReturnToPartyMenu();
+			StartCoroutine("BufferTime");
 		}
-		else if (Input.GetKey(KeyCode.Escape) && inEquipItemMenu)
+		else if (Input.GetKey(KeyCode.Escape) && inEquipItemMenu && !waitTime)
 		{
 			ReturnToEquipmentMenu();
+			StartCoroutine("BufferTime");
 		}
 
 	}
@@ -62,6 +81,7 @@ public class MenuController : MonoBehaviour {
 	{
 		inMenuSelect = true;
 		
+		taskMenu.gameObject.SetActive(false);
 		menu.gameObject.SetActive(true);
 	}
 
@@ -112,6 +132,7 @@ public class MenuController : MonoBehaviour {
 	{
 		inMenuSelect = false;
 
+		taskMenu.gameObject.SetActive(true);
 		menu.gameObject.SetActive(false);
 	}
 
@@ -182,13 +203,6 @@ public class MenuController : MonoBehaviour {
 
 	public void DisplayStats (string itemType) // Items item
 	{
-		// Rmv This later
-		// cImage.sprite = PlayerInventory.instance.item.uiSprite.sprite;
-		// cEquipName.text = PlayerInventory.instance.item.name;
-		// cDamage.text = "Damage: " + PlayerInventory.instance.item.minDamage + " - " + PlayerInventory.instance.item.maxDamage;
-		// cSpeed.text = "Speed: " + PlayerInventory.instance.item.speed;
-		// cCrit.text = "Crit: " + PlayerInventory.instance.item.crit;
-		// cHealth.text = "Health: " + PlayerInventory.instance.item.health;
 
 		if (itemType == "weapon")
 		{
@@ -227,7 +241,7 @@ public class MenuController : MonoBehaviour {
 
 		// Sets the scriptable object's stuff to the menu's stuff...  stuuuuuuuuuff
 	}
-
+	
 	public void EquipItemMenu ()
 	{
 		// Current Item Stats from current scriptable object
@@ -236,6 +250,13 @@ public class MenuController : MonoBehaviour {
 		// Asks if you are certain about your choice
 		// Runs The EquipItem() function from the PlayerInventory script
 		// Disables the sanity check function and displays "Item Equipped" || "You Can't Equip That"
+	}
+
+	IEnumerator BufferTime ()
+	{
+		waitTime = true;
+		yield return new WaitForSeconds(0.1f);
+		waitTime = false;
 	}
 
 
