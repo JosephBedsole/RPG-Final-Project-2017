@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -9,6 +10,11 @@ public class GameManager : MonoBehaviour {
 	public List<PlayerCharacter> pcList = new List<PlayerCharacter>();
 	public List<EnemyCharacter> enemyList = new List<EnemyCharacter>();
 
+	[HideInInspector]
+	public float battleChance = 0.0f;
+
+	bool battleCheck = false;
+
 	void Awake(){
 		if (instance == null){
 			instance = this;
@@ -16,6 +22,13 @@ public class GameManager : MonoBehaviour {
 		else{
 			Destroy(gameObject);
 		}
+	}
+
+	void Update(){
+		if(Input.GetKeyDown(KeyCode.B)){
+			StartBattle();
+		}
+		Mathf.Clamp(battleChance, 0.0f, 50.0f);
 	}
 
 
@@ -31,5 +44,18 @@ public class GameManager : MonoBehaviour {
 
 		Debug.Log("Did not find PC");
 		return tempPC;
+	}
+
+	public void StartBattle(){
+		SceneManager.LoadScene("BattleScene");
+	}
+
+	public void RandomEncounterRoll(){
+		battleCheck = true;
+		float battleRoll = Random.Range(0.0f, 50.0f);
+		if(battleRoll + battleChance > 70.0f){
+			StartBattle();
+		}
+		battleCheck = false;
 	}
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public float speed = 3;
+	bool isStepping = false;
 	float x;
 	float y;
 
@@ -24,9 +25,21 @@ public class PlayerController : MonoBehaviour {
 		x = Input.GetAxisRaw("Horizontal");
 		y = Input.GetAxisRaw("Vertical");
 
+		if((Mathf.Abs(x) > 0.5f || Mathf.Abs(y) > 0.5f) && !isStepping){
+			StartCoroutine("UpdateBattleChance");
+		}
+
 		body.velocity = new Vector2(x, y) * speed;
 
 		CameraMovement();
+	}
+
+	IEnumerator UpdateBattleChance(){
+		isStepping = true;
+		GameManager.instance.battleChance += 1.0f;
+		GameManager.instance.RandomEncounterRoll();
+		yield return new WaitForSeconds(1.0f);
+		isStepping = false;
 	}
 
 	void CameraMovement ()
