@@ -1,0 +1,3 @@
+[submodule "Tuesday"]
+	path = Tuesday
+	url = git@github.com:ShreveportArcade/Tuesday.git

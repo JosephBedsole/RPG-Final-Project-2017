@@ -5,14 +5,34 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Player", menuName = "RPG/Player")]
 public class PlayerCharacter : ScriptableObject {
 
-	public string name = "";
+	//Base
+	public string characterName = "";
 	public int LVL = 1;
-	public int HP = 0;
-	public int MP = 0;
-	public int Guts = 0;
-	public int Spirit = 0;
-	public int CT = 10;
+	public int baseHP = 1;
+	public int currHP = 1;
+	public int maxHP = 1;
+	public int baseMP = 1;
+	public int currMP = 1;
+	public int maxMP = 1;
+	public int baseGuts = 1;
+	public int currGuts = 1;
+	public int maxGuts = 1;
+	public int baseSpirit = 1;
+	public int currSpirit = 1;
+	public int maxSpirit = 1;
+	public int baseCT = 1;
+	public int currCT = 1;
+	public int maxCT = 1;
 
+	public int XP = 0;
 
+	//Combat
+	public int pAttackStrength = 5;
+
+	//Status
+	public bool canAct = false;
+	public bool isKO = false;
+
+	
 
 }
