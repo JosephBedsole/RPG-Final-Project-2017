@@ -7,11 +7,12 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager instance = null;
 
-	public List<PlayerCharacter> pcList = new List<PlayerCharacter>();
-	public List<EnemyCharacter> enemyList = new List<EnemyCharacter>();
-
 	[HideInInspector]
 	public float battleChance = 0.0f;
+	public float battleRollCheck = 70.0f;
+
+	public List<PlayerCharacter> pcList = new List<PlayerCharacter>();
+	public List<EnemyCharacter> enemyList = new List<EnemyCharacter>();
 
 	bool battleCheck = false;
 
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour {
 	public void RandomEncounterRoll(){
 		battleCheck = true;
 		float battleRoll = Random.Range(0.0f, 50.0f);
-		if(battleRoll + battleChance > 70.0f){
+		if(battleRoll + battleChance > battleRollCheck){
 			StartBattle();
 		}
 		battleCheck = false;
