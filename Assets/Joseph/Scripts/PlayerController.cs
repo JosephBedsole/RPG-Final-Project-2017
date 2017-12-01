@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour {
 
 	void Start ()
 	{
+		Cursor.visible = true;
+		AudioManager.PlayMusic();                            //   Remove this and put it on the game manager
 		body = GetComponent<Rigidbody2D>();
 	}
 

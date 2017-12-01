@@ -12407,6 +12407,7 @@ GameObject:
   - component: {fileID: 1502740555}
   - component: {fileID: 1502740556}
   - component: {fileID: 1502740557}
+  - component: {fileID: 1502740558}
   m_Layer: 0
   m_Name: Overworld Character
   m_TagString: Untagged
@@ -12529,6 +12530,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   offset: {x: 0, y: 0, z: -10}
+--- !u!95 &1502740558
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1502740552}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d888bee6e474f02458c5115e1ef7836b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1545813011
 GameObject:
   m_ObjectHideFlags: 0
@@ -14817,6 +14835,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1850541842}
+  - component: {fileID: 1850541843}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -14837,6 +14856,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1850541843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1850541841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1e8c7e0017e2049ab75375c59e6737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 8300000, guid: d8ba3055a76bc9a4780e1700b7b03a9f, type: 3}
+  music2: {fileID: 0}
+  music3: {fileID: 0}
+  musicMixer: {fileID: 0}
+  clips: []
+  sfxMixer: {fileID: 0}
+  sfxSourcesCount: 5
 --- !u!1 &1867507739
 GameObject:
   m_ObjectHideFlags: 0
