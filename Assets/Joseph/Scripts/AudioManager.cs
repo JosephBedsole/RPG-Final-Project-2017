@@ -39,10 +39,7 @@ public class AudioManager : MonoBehaviour {
     }
     // Assigning sources to objects
     void Start()
-    {   // ----------------------------------------            Makes Cursor Invisible!!!!!!!!!!!!!!!!!!
-        Cursor.visible = false;
-        // ---------------------------------------------------------------------------------------------------------------------
-
+    {   
         sfxSources = new AudioSource[sfxSourcesCount];
         for (int i = 0; i < sfxSourcesCount; ++i)
         {

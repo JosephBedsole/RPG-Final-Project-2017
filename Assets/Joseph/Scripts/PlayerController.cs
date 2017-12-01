@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public float speed = 3;
+	bool isStepping = false;
 	float x;
 	float y;
 
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	void Start ()
 	{
 		Cursor.visible = true;
-		AudioManager.PlayMusic();                            //   Remove this and put it on the game manager
+		// AudioManager.PlayMusic();                            //   Remove this and put it on the game manager
 		body = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
 	}
@@ -34,6 +35,18 @@ public class PlayerController : MonoBehaviour {
 		anim.SetFloat("RunY", y);
 
 		CameraMovement();
+
+		if((Mathf.Abs(x) > 0.5f || Mathf.Abs(y) > 0.5f) && !isStepping){
+			StartCoroutine("UpdateBattleChance");
+		}
+	}
+
+	IEnumerator UpdateBattleChance(){
+		isStepping = true;
+		GameManager.instance.battleChance += 1.0f;
+		GameManager.instance.RandomEncounterRoll();
+		yield return new WaitForSeconds(1.0f);
+		isStepping = false;
 	}
 
 	void CameraMovement ()

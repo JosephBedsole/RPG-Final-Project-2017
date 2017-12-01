@@ -509,6 +509,48 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1001 &315600217
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4766936309123656, guid: 580f5da9303eb274999cb9312019b78b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 298.0911
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766936309123656, guid: 580f5da9303eb274999cb9312019b78b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 140.54771
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766936309123656, guid: 580f5da9303eb274999cb9312019b78b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766936309123656, guid: 580f5da9303eb274999cb9312019b78b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766936309123656, guid: 580f5da9303eb274999cb9312019b78b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766936309123656, guid: 580f5da9303eb274999cb9312019b78b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766936309123656, guid: 580f5da9303eb274999cb9312019b78b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4766936309123656, guid: 580f5da9303eb274999cb9312019b78b, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 580f5da9303eb274999cb9312019b78b, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &337542915
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +663,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1105381872}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -41.19861, y: 185.18745, z: 0}
+  m_LocalPosition: {x: -95.2798, y: 178.78128, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 644041817}
@@ -763,7 +805,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 422504652}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -41.583416, z: 0}
+  m_LocalPosition: {x: 0, y: -40.15687, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1402231287}
@@ -954,7 +996,7 @@ GameObject:
   - component: {fileID: 493141396}
   - component: {fileID: 493141398}
   m_Layer: 5
-  m_Name: MenuButton
+  m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1064,11 +1106,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1485870683}
         m_MethodName: ActionClick
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: Attack
           m_BoolArgument: 0
@@ -1106,7 +1148,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 524210941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.223572, y: -135.70819, z: 0}
+  m_LocalPosition: {x: 60.77957, y: -131.06128, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 815504325}
@@ -1154,7 +1196,7 @@ GameObject:
   - component: {fileID: 524756385}
   - component: {fileID: 524756384}
   m_Layer: 5
-  m_Name: MenuButton (2)
+  m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1202,11 +1244,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1485870683}
         m_MethodName: ActionClick
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: Attack
           m_BoolArgument: 0
@@ -1269,7 +1311,7 @@ GameObject:
   - component: {fileID: 627917663}
   - component: {fileID: 627917662}
   m_Layer: 5
-  m_Name: MenuButton (1)
+  m_Name: Skill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1317,11 +1359,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1485870683}
         m_MethodName: ActionClick
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: Attack
           m_BoolArgument: 0
@@ -1579,7 +1621,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 725218440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -206.6853, y: 19.035515, z: 0}
+  m_LocalPosition: {x: -438.94586, y: 18.368004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2061470816}
@@ -1759,7 +1801,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 815504324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 41.58341, z: 0}
+  m_LocalPosition: {x: 0, y: 40.156864, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1463001527}
@@ -1899,11 +1941,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad838d9cd2230b24aa650b877a2b3c15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pc1: {fileID: 0}
-  pc2: {fileID: 0}
-  pc3: {fileID: 0}
-  pc4: {fileID: 0}
-  DebugCTRate: 0.05
+  startCT: 0
+  debugCTRate: 0.05
+  BASE_CT_CHARGE: 0.001
+  pcCT:
+  - 0
+  - 0
+  - 0
+  - 0
+  enemyCT:
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!4 &826240334
 Transform:
   m_ObjectHideFlags: 0
@@ -1916,51 +1966,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &834849415
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 834849417}
-  - component: {fileID: 834849416}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &834849416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 834849415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39f13ba4c3d0f0f47bc6bc8ad307ec27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pcList:
-  - {fileID: 11400000, guid: 20bd01184aba51048bc4046cf19ae48b, type: 2}
-  - {fileID: 11400000, guid: a95bbcc1bfe1b4249847b71175ac8239, type: 2}
-  - {fileID: 11400000, guid: e9ce511f7e316a041b1d634d08bb8a08, type: 2}
-  - {fileID: 11400000, guid: dd7d7da1915618e41b38dc64e2dc5a86, type: 2}
---- !u!4 &834849417
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 834849415}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 298.0911, y: 140.54771, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &844708336
 GameObject:
@@ -2003,7 +2008,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -2355,7 +2360,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1494088936}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 166.03401, y: 187.38737, z: 0}
+  m_LocalPosition: {x: 354.4136, y: 180.9812, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1913448207}
@@ -2466,11 +2471,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1485870683}
         m_MethodName: EnemyClick
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2754,12 +2759,12 @@ Prefab:
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -98.96752
+      value: -209.84273
       objectReference: {fileID: 0}
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -23.052979
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
@@ -2850,6 +2855,11 @@ Prefab:
       propertyPath: m_Name
       value: pc1
       objectReference: {fileID: 0}
+    - target: {fileID: 114451452980344942, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8, type: 2}
   m_IsPrefabParent: 0
@@ -2882,7 +2892,7 @@ Prefab:
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -98.96752
+      value: -209.84273
       objectReference: {fileID: 0}
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
@@ -2981,7 +2991,7 @@ Prefab:
     - target: {fileID: 114451452980344942, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8, type: 2}
@@ -3186,7 +3196,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1485870678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 278, y: 219.5, z: 0}
+  m_LocalPosition: {x: 588, y: 212, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 725218441}
@@ -3214,6 +3224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f08535430642974e91b4cd2ec36cc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  postBattleScene: InventoryTest
   pointer: {fileID: 1019487691}
   ct1: {fileID: 1937226848}
   ct2: {fileID: 1967658882}
@@ -3223,6 +3234,10 @@ MonoBehaviour:
   ct2Speed: 0
   ct3Speed: 0
   ct4Speed: 0
+  pcPanelList: []
+  enemyPanelList: []
+  actionPanelList: []
+  enemySpriteList: []
 --- !u!1 &1494088936
 GameObject:
   m_ObjectHideFlags: 0
@@ -3319,11 +3334,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1485870683}
         m_MethodName: EnemyClick
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3711,7 +3726,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1485870683}
         m_MethodName: EnemyClick
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3730,7 +3745,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1646992944}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -158.50928, y: 185.68745, z: 0}
+  m_LocalPosition: {x: -336.9369, y: 179.28128, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 815706492}
@@ -3989,7 +4004,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2034498445}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 57.610046, y: 185.68745, z: 0}
+  m_LocalPosition: {x: 122.186035, y: 179.28128, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 148186229}
@@ -4207,12 +4222,12 @@ Prefab:
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 98.967514
+      value: 209.84274
       objectReference: {fileID: 0}
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -23.052979
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
@@ -4306,7 +4321,7 @@ Prefab:
     - target: {fileID: 114451452980344942, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8, type: 2}
@@ -4496,11 +4511,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1485870683}
         m_MethodName: EnemyClick
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4581,7 +4596,7 @@ Prefab:
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 98.967514
+      value: 209.84274
       objectReference: {fileID: 0}
     - target: {fileID: 224096622290614814, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
@@ -4680,7 +4695,7 @@ Prefab:
     - target: {fileID: 114451452980344942, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8dd67bc0035c2bf4b8428fdb0823d5c8, type: 2}
