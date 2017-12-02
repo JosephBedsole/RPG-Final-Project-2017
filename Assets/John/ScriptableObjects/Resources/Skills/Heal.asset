@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Heal
   m_EditorClassIdentifier: 
   skillName: Heal
-  damage: -30
+  damage: -50
   multiTarget: 0

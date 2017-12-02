@@ -45,6 +45,9 @@ public class BattleCanvasController : MonoBehaviour {
 	public List<GameObject> actionPanelList = new List<GameObject>();
 	public List<GameObject> enemySpriteList = new List<GameObject>();
 	public List<GameObject> skillPanelList = new List<GameObject>();
+	List<Skill> skillList = new List<Skill>();
+	List<GameObject> skillObjects = new List<GameObject>();
+
 
 	public Queue<IEnumerator> actionQueue = new Queue<IEnumerator>();
 
@@ -88,7 +91,7 @@ public class BattleCanvasController : MonoBehaviour {
 
 		skillPanel = GameObject.Find("SkillPanel");
 		skillPanelUI = GameObject.Find("SkillPanelUI");
-		CreateSkillList(0); //TODO: Populate menu when pc is selected, then skils selected
+		//CreateSkillList(0); //TODO: Populate menu when pc is selected, then skils selected
 		skillPanel.SetActive(false);
 
 		StartCoroutine("ActionBuffer");
@@ -134,7 +137,9 @@ public class BattleCanvasController : MonoBehaviour {
 		}
 		else if(selection == Selection.action){
 			selection = Selection.none;
-			actionPanel.SetActive(false);
+			UseSkill(GameManager.instance.pcList[playerNum], GameManager.instance.pcList[actingPlayer], selectedSkill);
+			//skillPanel.SetActive(false);
+			HideSkillMenu();
 			Debug.Log("Performing action on target pc");
 			playerActed(actingPlayer);
 			//actingPlayer = -1;
@@ -152,6 +157,7 @@ public class BattleCanvasController : MonoBehaviour {
 				case(2):
 					selection = Selection.action;
 					action = Action.skill;
+					CreateSkillList(actingPlayer);
 					DisplaySkillMenu();
 					Debug.Log("Action Selected, choose target");
 				break;
@@ -175,7 +181,9 @@ public class BattleCanvasController : MonoBehaviour {
 					AttackEnemy(enemyNum, actingPlayer);
 				break;
 				case(Action.skill):
-				UseSkill(GameManager.instance.enemyList[enemyNum], GameManager.instance.pcList[actingPlayer], selectedSkill);
+					UseSkill(GameManager.instance.enemyList[enemyNum], GameManager.instance.pcList[actingPlayer], selectedSkill);
+					//skillPanel.SetActive(false);
+					HideSkillMenu();
 				break;
 				case(Action.item):
 				break;
@@ -325,10 +333,10 @@ public class BattleCanvasController : MonoBehaviour {
 	}
 
 	void CreateSkillList(int pc){
-		List<Skill> skillList;
 		skillList = GameManager.instance.pcList[pc].job.GetSkills(GameManager.instance.pcList[pc].LVL);
 		for(int i = 0; i < skillList.Count; i++){
 			GameObject tempButton = GameObject.Instantiate(skillButton);
+			skillObjects.Add(tempButton);
 			tempButton.transform.SetParent(skillPanelUI.transform);
 			tempButton.transform.localScale = Vector3.one;
 			tempButton.GetComponent<Text>().text = skillList[i].skillName;
@@ -341,19 +349,30 @@ public class BattleCanvasController : MonoBehaviour {
 		skillPanel.SetActive(true);
 	}
 
+	void HideSkillMenu(){
+		skillPanel.SetActive(false);
+		skillList.Clear();
+		for(int i = 0; i < skillObjects.Count; i++){
+			Destroy(skillObjects[i]);
+		}
+		skillObjects.Clear();
+	}
+
 	void UseSkill(ScriptableObject target, ScriptableObject caster, Skill skill){
 		if(target is EnemyCharacter){
 			EnemyCharacter targetedEnemy = target as EnemyCharacter;
-			if(skill.damage >= 0){
+			if(skill.damage != 0){
 				targetedEnemy.currHP -= skill.damage;
 			}
 		}
 		else if(target is PlayerCharacter){
 			PlayerCharacter targetedPlayer = target as PlayerCharacter;
-			if(skill.damage >= 0){
+			if(skill.damage != 0){
 				targetedPlayer.currHP -= skill.damage;
 			}
 		}
-		
+
+		SetEnemyStatsUI();
+		SetPlayerStatsUI();
 	}
 }
