@@ -7,6 +7,7 @@ public class PlayerCharacter : ScriptableObject {
 
 	//Base
 	public string characterName = "";
+	public Job job;
 	public int LVL = 1;
 	public int baseHP = 1;
 	public int currHP = 1;

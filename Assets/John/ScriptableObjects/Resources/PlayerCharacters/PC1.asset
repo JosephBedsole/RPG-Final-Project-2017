@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Name: PC1
   m_EditorClassIdentifier: 
   characterName: 
-  LVL: 1
+  job: {fileID: 11400000, guid: c32c88c2873b9da48811f6fa28300fb7, type: 2}
+  LVL: 5
   baseHP: 1
   currHP: -15
   maxHP: 1
@@ -30,5 +31,5 @@ MonoBehaviour:
   maxCT: 1
   XP: 0
   pAttackStrength: 30
-  canAct: 1
+  canAct: 0
   isKO: 1
