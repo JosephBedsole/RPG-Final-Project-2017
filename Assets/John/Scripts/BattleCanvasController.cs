@@ -291,6 +291,8 @@ public class BattleCanvasController : MonoBehaviour {
 		for(int i = 0; i < GameManager.instance.enemyList.Count; i++){
 			if(GameManager.instance.enemyList[i].currHP <= 0.0f){
 				GameManager.instance.enemyList[i].isKO = true;
+				RewardManager.rewardXP += GameManager.instance.enemyList[i].LVL * 100;
+				RewardManager.rewardGold += GameManager.instance.enemyList[i].LVL * Random.Range(1,100);
 			}
 			if(GameManager.instance.enemyList[i].isKO == true){
 				BattleManager.instance.enemyCT[i] = 0.0f;
@@ -310,6 +312,11 @@ public class BattleCanvasController : MonoBehaviour {
 		EnemyCharacter pc = GameManager.instance.enemyList.Find((g) => !g.isKO);
 		if(pc == null){
 			Debug.Log("Player Wins!!!!");
+			for(int i = 0; i < 3; i++){
+				GameManager.instance.pcList[i].XP += RewardManager.rewardXP;
+			}
+			PlayerInventory.instance.gold += RewardManager.rewardGold;
+			RewardManager.ResetReward();
 			SceneManager.LoadScene(postBattleScene);
 		} 
 	}
@@ -317,6 +324,7 @@ public class BattleCanvasController : MonoBehaviour {
 	void CheckLose(){
 		PlayerCharacter pc = GameManager.instance.pcList.Find((g) => g.isKO);
 		if(pc == null) Debug.Log("Player Wins!!!!");
+		RewardManager.ResetReward();
 	}
 
 	T GetRand<T> (List<T> list) {
