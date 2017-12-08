@@ -13,17 +13,15 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 
-	public int gold = 0;
 
 	[Header("Inventory Items")]
 	public Items[] items;
 	public List<Items> itemz = new List<Items>();
 
 	public Items item;
+	public int gold = 0;
 
-	[Header("Item Visualization")]
-	public Transform[] inventorySlots; 
-	// List of characterInventorySlots Arrays
+	MenuController menuCon = MenuController.instance;
 
 	void Start () 
 	{
@@ -43,26 +41,25 @@ public class PlayerInventory : MonoBehaviour {
 		// if (isInShop)    then you should have some sort of exchange of gold
 	}
 
-	public void EquipItem () // This will equip an item to the selected character
+	public void EquipItem (Items itemSelected) // This will equip an item to the selected character
 	{
-		// if (item class == character class)
-		// Move to a specified character inventory;
-		if (true) // item tag == weapon
+		// if (player class == weapon class);
+		if (menuCon.characterSelected.mainHand.itemTag == "weapon") // item tag == weapon
 		{
-			// Move the currently equipped item to the inventory
-			// Move the Item to the character's mainHand slot
+			//   Move the currently equipped item to the inventory
+			//   menuCon.characterSelected.mainHand = itemz[];
 		}
-		else if (true) // item tag == armor
+		else if (menuCon.characterSelected.armor.itemTag == "armor") // item tag == armor
 		{
-
+			//   menuCon.characterSelected.armor = itemz[];
 		}
-		else if (true) // item tag == accessory
+		else if (menuCon.characterSelected.accessory.itemTag == "accessory") // item tag == accessory
 		{
-
+			//   menuCon.characterSelected.accessory = itemz[];
 		}
 		else
 		{
-			// Display: "You can't equip that dingus."
+			Debug.Log("You can't equip that item dingus!");
 		}
 		// else
 		// Display: "You can't equip that class of weapon."
