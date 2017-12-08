@@ -116,6 +116,7 @@ public class PlayerController : MonoBehaviour {
 			// Display do you want to enter
 			// or
 			// Just transition
+			SceneController.instance.ChangeScene();
 		}
 
 		if (c.gameObject.tag == "Chest")
