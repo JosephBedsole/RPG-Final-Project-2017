@@ -8,12 +8,13 @@ public class PlayerController : MonoBehaviour {
 	bool isStepping = false;
 	float x;
 	float y;
+	int i = 0;
 
 	public Vector3 offset = new Vector3(0, 0, -10);
-
 	ChestController chest;
 	Animator anim;
 	Rigidbody2D body;
+	SpriteRenderer charSprite;
 
 	void Start ()
 	{
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour {
 		// AudioManager.PlayMusic();                            //   Remove this and put it on the game manager
 		body = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
+		charSprite = GetComponent<SpriteRenderer>();
 	}
 
 	void FixedUpdate ()
@@ -33,11 +35,46 @@ public class PlayerController : MonoBehaviour {
 		anim.SetFloat("Speed", body.velocity.magnitude);
 		anim.SetFloat("RunX", x);
 		anim.SetFloat("RunY", y);
+		
+		CheckDirection();
 
 		CameraMovement();
 
 		if((Mathf.Abs(x) > 0.5f || Mathf.Abs(y) > 0.5f) && !isStepping){
 			StartCoroutine("UpdateBattleChance");
+		}
+	}
+
+	void CheckDirection ()
+	{
+		Debug.Log("What's up");
+		if (body.velocity.x > 0.1f)
+		{
+			anim.SetBool("Right", true);
+			anim.SetBool("Left", false);
+			anim.SetBool("Up", false);
+			anim.SetBool("Down", false);
+		}
+		else if (body.velocity.x < -0.1f)
+		{
+			anim.SetBool("Right", false);
+			anim.SetBool("Left", true);
+			anim.SetBool("Up", false);
+			anim.SetBool("Down", false);
+		}
+		else if (body.velocity.y > 0.1f)
+		{
+			anim.SetBool("Right", false);
+			anim.SetBool("Left", false);
+			anim.SetBool("Up", true);
+			anim.SetBool("Down", false);
+		}
+		else if (body.velocity.y < -0.1f)
+		{
+			anim.SetBool("Right", false);
+			anim.SetBool("Left", false);
+			anim.SetBool("Up", false);
+			anim.SetBool("Down", true);
 		}
 	}
 
@@ -52,37 +89,6 @@ public class PlayerController : MonoBehaviour {
 	void CameraMovement ()
 	{
 		Camera.main.transform.position = this.transform.position + offset;
-		// Vector3 newXOffset;
-		// Vector3 newYOffset;
-
-		// if (x > 0.1f)
-		// {
-		// 	newXOffset = new Vector3(1, 0, -10);
-		// }
-		// else if (x < -0.1f)
-		// {
-		// 	newXOffset = new Vector3(-1, 0, -10);
-		// }
-		// else
-		// {
-		// 	newXOffset = new Vector3(0, 0, -10);
-		// }
-
-		// if (y > 0.1f)
-		// {
-		// 	newYOffset = new Vector3(0, 1, -10);
-		// }
-		// else if (y < -0.1f)
-		// {
-		// 	newYOffset = new Vector3(0, -1, -10);
-		// }
-		// else
-		// {
-		// 	newYOffset = new Vector3(0, 0, -10);
-		// }
-
-		// offset = newXOffset + newYOffset;
-
 	}
 
 	public void OpenChest ()

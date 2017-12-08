@@ -27,7 +27,8 @@ public class DisplayInventory : MonoBehaviour {
 
 	Items tempItem;
 
-	private UnityAction actionToTake;
+	private UnityAction firstAction;
+	private UnityAction secondAction;
 
 
 	void DisplayInventoryStats (Items item) // Items item
@@ -69,11 +70,16 @@ public class DisplayInventory : MonoBehaviour {
 				newSlot.transform.position = prevSlot.transform.position - offset;
 			}
 
+			//   For second action get a second button that is on the displayed inventory stats screen;
+
 			Items item = PlayerInventory.instance.itemz[i];
+			PlayerInventory slotitem = newSlot.GetComponent<PlayerInventory>();
 			Button newItem = newSlot.GetComponent<Button>();
 
-			actionToTake += delegate{DisplayInventoryStats(item);};
-			newItem.onClick.AddListener(actionToTake);
+			firstAction += delegate{DisplayInventoryStats(item);};  
+			secondAction += delegate{slotitem.EquipItem(item);};                           //   This is where I'm giving the button an onClick() event;
+			newItem.onClick.AddListener(firstAction);
+			newItem.onClick.AddListener(secondAction);
 
 			Text itemText = newSlot.GetComponentInChildren<Text>();
 			itemText.text = item.itemName;
@@ -90,6 +96,12 @@ public class DisplayInventory : MonoBehaviour {
 			prevSlot = newSlot;
 
 		}
+
+	}
+
+	public void ResizeParent ()
+	{
+		parentSize = 60;
 	}
 
 	// This is an alternate to the above function that uses the DisplayStats script rather than keeping everything within this script;
