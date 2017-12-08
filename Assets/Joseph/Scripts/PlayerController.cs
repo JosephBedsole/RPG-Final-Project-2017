@@ -12,26 +12,33 @@ public class PlayerController : MonoBehaviour {
 	public Vector3 offset = new Vector3(0, 0, -10);
 
 	ChestController chest;
-
+	Animator anim;
 	Rigidbody2D body;
 
 	void Start ()
 	{
+		Cursor.visible = true;
+		// AudioManager.PlayMusic();                            //   Remove this and put it on the game manager
 		body = GetComponent<Rigidbody2D>();
+		anim = GetComponent<Animator>();
 	}
 
 	void FixedUpdate ()
 	{
 		x = Input.GetAxisRaw("Horizontal");
-		y = Input.GetAxisRaw("Vertical");
+		y = Input.GetAxisRaw("Vertical");		
+
+		body.velocity = new Vector2(x, y) * speed;
+		
+		anim.SetFloat("Speed", body.velocity.magnitude);
+		anim.SetFloat("RunX", x);
+		anim.SetFloat("RunY", y);
+
+		CameraMovement();
 
 		if((Mathf.Abs(x) > 0.5f || Mathf.Abs(y) > 0.5f) && !isStepping){
 			StartCoroutine("UpdateBattleChance");
 		}
-
-		body.velocity = new Vector2(x, y) * speed;
-
-		CameraMovement();
 	}
 
 	IEnumerator UpdateBattleChance(){
