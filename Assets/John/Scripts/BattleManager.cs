@@ -13,6 +13,7 @@ public class BattleManager : MonoBehaviour {
     float MAXCT = 1.0f;
     float MINCT = 0.0f;
     public float BASE_CT_CHARGE = 0.00001f;
+    bool readySFX = false;
 
     [HideInInspector]
     public float[] pcCT = {0.0f,0.0f,0.0f,0.0f};
@@ -73,10 +74,13 @@ public class BattleManager : MonoBehaviour {
         for (int i = 0; i < pcPanelList.Count; i++){
             GameObject ctTemp = pcPanelList[i].transform.Find("CT").gameObject;
             if(ctTemp.GetComponent<Image>().fillAmount < 1.0f){
+                readySFX = false;
                 ctTemp.GetComponent<Image>().fillAmount += BASE_CT_CHARGE + (float)pcSheets[i].currCT/1000;
                 pcCT[i] += BASE_CT_CHARGE + (float)pcSheets[i].currCT/1000; // TODO, replace image scale stuff with this
             }
             else{
+                if(!readySFX){ AudioManager.PlayEffect("Ready1");}
+                readySFX = true;
                 pcSheets[i].canAct = true;
             }
         }
