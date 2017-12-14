@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565174122c1d0714fb21d3129d1859a5, type: 3}
   m_Name: PC1
   m_EditorClassIdentifier: 
-  characterName: 
+  characterName: Bobby
   job: {fileID: 11400000, guid: c32c88c2873b9da48811f6fa28300fb7, type: 2}
   LVL: 5
   baseHP: 1
-  currHP: -15
+  currHP: 85
   maxHP: 1
   baseMP: 1
   currMP: 1
@@ -31,5 +31,5 @@ MonoBehaviour:
   maxCT: 1
   XP: 0
   pAttackStrength: 30
-  canAct: 0
+  canAct: 1
   isKO: 1

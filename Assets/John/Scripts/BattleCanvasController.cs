@@ -118,9 +118,9 @@ public class BattleCanvasController : MonoBehaviour {
 		}
 		for(int i = 0; i < 4; i++)//{
 			if(BattleManager.instance.enemySheets[i].canAct == false)
-				//enemyPanelList[i].GetComponent<Image>().color = new Color(1,1,1,0.1f);
-			//else
-				//enemyPanelList[i].GetComponent<Image>().color = new Color(1,1,1,1.0f);
+				enemyPanelList[i].GetComponent<Image>().color = new Color(1,1,1,0.1f);
+			else
+				enemyPanelList[i].GetComponent<Image>().color = new Color(1,1,1,1.0f);
 		//}
 
 		CheckHealth();
@@ -145,6 +145,7 @@ public class BattleCanvasController : MonoBehaviour {
 			skillSelected = false;
 			//skillPanel.SetActive(false);
 			HideSkillMenu();
+			AudioManager.PlayEffect("Attack1");
 			Debug.Log("Performing action on target pc");
 			playerActed(actingPlayer);
 			//actingPlayer = -1;
@@ -169,7 +170,7 @@ public class BattleCanvasController : MonoBehaviour {
 					action = Action.skill;
 					CreateSkillList(actingPlayer);
 					DisplaySkillMenu();
-					AudioManager.PlayEffect("Select2");
+					AudioManager.PlayEffect("Select1");
 					Debug.Log("Action Selected, choose target");
 				break;
 				case(3):
@@ -196,6 +197,7 @@ public class BattleCanvasController : MonoBehaviour {
 				case(Action.skill):
 					UseSkill(GameManager.instance.enemyList[enemyNum], GameManager.instance.pcList[actingPlayer], selectedSkill);
 					//skillPanel.SetActive(false);
+					AudioManager.PlayEffect("Attack1");
 					HideSkillMenu();
 					skillSelected = false;
 					
@@ -216,6 +218,7 @@ public class BattleCanvasController : MonoBehaviour {
 	public void SkillClicked(Skill skill){
 		selectedSkill = skill;
 		skillSelected = true;
+		AudioManager.PlayEffect("Select2");
 
 	}
 
