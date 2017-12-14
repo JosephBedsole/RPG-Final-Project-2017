@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	void Start(){
+		InitiatePlayerAttributes();
+	}
+
 	void Update(){
 		if(Input.GetKeyDown(KeyCode.B)){
 			StartBattle();
@@ -58,5 +62,14 @@ public class GameManager : MonoBehaviour {
 			StartBattle();
 		}
 		battleCheck = false;
+	}
+
+	void InitiatePlayerAttributes(){
+		for(int i = 0; i < 4; i++){
+			PlayerCharacter tPC = pcList[i];
+			tPC.maxHP = tPC.baseHP + tPC.Weapon.health + tPC.Armor.health + tPC.Accessory.health;	
+			tPC.maxGuts = tPC.baseGuts;
+			tPC.pAttackStrength = tPC.pAttackStrength + tPC.Weapon.maxDamage + tPC.Armor.maxDamage + tPC.Accessory.maxDamage;
+		}
 	}
 }

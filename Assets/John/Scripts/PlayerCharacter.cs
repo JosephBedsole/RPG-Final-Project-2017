@@ -34,6 +34,10 @@ public class PlayerCharacter : ScriptableObject {
 	public bool canAct = false;
 	public bool isKO = false;
 
+	//Items
+	public Items Weapon;
+	public Items Armor;
+	public Items Accessory;
 	
 
 }
