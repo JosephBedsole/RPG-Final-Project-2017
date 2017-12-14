@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour {
 			tPC.maxHP = tPC.baseHP + tPC.Weapon.health + tPC.Armor.health + tPC.Accessory.health;	
 			tPC.maxGuts = tPC.baseGuts;
 			tPC.pAttackStrength = tPC.pAttackStrength + tPC.Weapon.maxDamage + tPC.Armor.maxDamage + tPC.Accessory.maxDamage;
+			tPC.currCT = tPC.currCT + tPC.Accessory.speed;
 		}
 	}
 }
