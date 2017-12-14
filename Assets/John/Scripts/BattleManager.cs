@@ -9,12 +9,9 @@ public class BattleManager : MonoBehaviour {
 
     public float startCT = 0.0f;
     public float debugCTRate = 0.05f;
-
-    float MAXCT = 1.0f;
-    float MINCT = 0.0f;
     public float BASE_CT_CHARGE = 0.00001f;
-    bool readySFX = false;
-
+    [HideInInspector]
+    public bool[] readyToAct = {false, false, false, false};
     [HideInInspector]
     public float[] pcCT = {0.0f,0.0f,0.0f,0.0f};
     [HideInInspector]
@@ -30,6 +27,9 @@ public class BattleManager : MonoBehaviour {
     public List<EnemyCharacter> enemySheets {
         get{return _enemySheets;}
     }
+
+    float MAXCT = 1.0f;
+    float MINCT = 0.0f;
     
     void Awake(){
         if(instance == null) instance = this;
@@ -74,14 +74,20 @@ public class BattleManager : MonoBehaviour {
         for (int i = 0; i < pcPanelList.Count; i++){
             GameObject ctTemp = pcPanelList[i].transform.Find("CT").gameObject;
             if(ctTemp.GetComponent<Image>().fillAmount < 1.0f){
-                readySFX = false;
+                
                 ctTemp.GetComponent<Image>().fillAmount += BASE_CT_CHARGE + (float)pcSheets[i].currCT/1000;
                 pcCT[i] += BASE_CT_CHARGE + (float)pcSheets[i].currCT/1000; // TODO, replace image scale stuff with this
+
+                if(ctTemp.GetComponent<Image>().fillAmount >= 1.0f){
+                    readyToAct[i] = true;
+                    pcSheets[i].canAct = true;
+                }
+            }
+            else if(pcSheets[i].canAct && readyToAct[i]){
+                BattleCanvasController.instance.PlayerReady(i);
             }
             else{
-                if(!readySFX){ AudioManager.PlayEffect("Ready1");}
-                readySFX = true;
-                pcSheets[i].canAct = true;
+               //Stuff
             }
         }
 

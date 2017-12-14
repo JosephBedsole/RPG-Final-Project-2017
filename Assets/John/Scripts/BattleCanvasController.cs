@@ -401,4 +401,9 @@ public class BattleCanvasController : MonoBehaviour {
 		SetEnemyStatsUI();
 		SetPlayerStatsUI();
 	}
+
+	public void PlayerReady(int pc){
+		BattleManager.instance.readyToAct[pc] = false;
+		AudioManager.PlayEffect("Ready1");
+	}
 }
