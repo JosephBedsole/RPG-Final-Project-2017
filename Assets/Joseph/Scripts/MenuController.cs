@@ -12,6 +12,7 @@ public class MenuController : MonoBehaviour {
 	public Transform menu;
 	public Transform menuSelect;
 	public Transform inventoryMenu;
+	public Transform optionsMenu;
 
 	[Header("Party Menus")]
 	public Transform partyMenu;
@@ -94,6 +95,14 @@ public class MenuController : MonoBehaviour {
 		menuSelect.gameObject.SetActive(false);
 	}
 
+	public void ViewOptions ()
+	{
+		inSecondTierMenus = true;
+
+		optionsMenu.gameObject.SetActive(true);
+		menuSelect.gameObject.SetActive(false);
+	}
+
 	public void ViewParty ()
 	{
 		inSecondTierMenus = true;
@@ -142,6 +151,7 @@ public class MenuController : MonoBehaviour {
 
 		inventoryMenu.gameObject.SetActive(false);
 		partyMenu.gameObject.SetActive(false);
+		optionsMenu.gameObject.SetActive(false);
 		menuSelect.gameObject.SetActive(true);
 	}
 

@@ -77,9 +77,9 @@ public class DisplayInventory : MonoBehaviour {
 			Button newItem = newSlot.GetComponent<Button>();
 
 			firstAction += delegate{DisplayInventoryStats(item);};  
-			secondAction += delegate{slotitem.EquipItem(item);};                           //   This is where I'm giving the button an onClick() event;
+			//secondAction += delegate{slotitem.EquipItem(item);};                           //   This is where I'm giving the button an onClick() event;
 			newItem.onClick.AddListener(firstAction);
-			newItem.onClick.AddListener(secondAction);
+			//newItem.onClick.AddListener(secondAction);
 
 			Text itemText = newSlot.GetComponentInChildren<Text>();
 			itemText.text = item.itemName;

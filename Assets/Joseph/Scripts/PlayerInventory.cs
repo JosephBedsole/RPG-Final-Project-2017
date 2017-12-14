@@ -15,22 +15,14 @@ public class PlayerInventory : MonoBehaviour {
 
 
 	[Header("Inventory Items")]
-	public Items[] items;
 	public List<Items> itemz = new List<Items>();
-
-	public Items item;
 	public int gold = 0;
 
 	MenuController menuCon = MenuController.instance;
 
 	void Start () 
 	{
-		item = items[1];
-	}
-	
-	void Update () 
-	{
-
+		
 	}
 
 	public void AddItem (Items newItem)   // This will Add an Item from other sources to the PlayerInventory
@@ -63,17 +55,6 @@ public class PlayerInventory : MonoBehaviour {
 		}
 		// else
 		// Display: "You can't equip that class of weapon."
-	}
-
-
-
-
-
-
-
-	public void MoveItem () // Maybe wait off on this
-	{
-		// Move from one sell to another;
 	}
 
 	public void DropItem () // Maybe wait off on this
