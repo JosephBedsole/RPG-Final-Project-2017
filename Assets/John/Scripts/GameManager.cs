@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour {
 	[HideInInspector]
 	public float battleChance = 0.0f;
 	public float battleRollCheck = 70.0f;
+	public string townSceneName;
+	public string dungeonSceneName;
+	public float townBattleChance = 200;
+	public float dungeonBattleChannge = 65;
 
 	public List<PlayerCharacter> pcList = new List<PlayerCharacter>();
 	public List<EnemyCharacter> enemyList = new List<EnemyCharacter>();
@@ -23,6 +27,14 @@ public class GameManager : MonoBehaviour {
 		else{
 			Destroy(gameObject);
 		}
+	}
+
+	void OnEnable(){
+		SceneManager.sceneLoaded += OnSceneLoaded;
+	}
+
+	void OnDisable(){
+		SceneManager.sceneLoaded -= OnSceneLoaded;
 	}
 
 	void Start(){
@@ -120,4 +132,16 @@ public class GameManager : MonoBehaviour {
 			}
 		}	
 	}
+
+	void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+		Debug.Log("Scene Loaded");
+		if(scene.name == dungeonSceneName){
+			battleRollCheck = dungeonBattleChannge;
+		}
+		else if(scene.name == townSceneName){
+			battleRollCheck = townBattleChance; //No encounters 
+		}
+	}
+
+
 }

@@ -73,7 +73,10 @@ public class BattleManager : MonoBehaviour {
     public void UpdateCT(){
         for (int i = 0; i < pcPanelList.Count; i++){
             GameObject ctTemp = pcPanelList[i].transform.Find("CT").gameObject;
-            if(ctTemp.GetComponent<Image>().fillAmount < 1.0f){
+            if(pcSheets[i].currHP <= 0){
+                CheckPlayerDeaths();
+            }
+            else if(ctTemp.GetComponent<Image>().fillAmount < 1.0f){
                 
                 ctTemp.GetComponent<Image>().fillAmount += BASE_CT_CHARGE + (float)pcSheets[i].currCT/1000;
                 pcCT[i] += BASE_CT_CHARGE + (float)pcSheets[i].currCT/1000; // TODO, replace image scale stuff with this
@@ -141,5 +144,15 @@ public class BattleManager : MonoBehaviour {
 
     public bool CanPCAct(int pcSheet){
         return pcSheets[pcSheet].canAct;  
+    }
+
+    public void CheckPlayerDeaths(){
+        for(int i = 0; i < 4; i++){
+            if(pcSheets[i].currHP <= 0){
+                pcCT[i] = 0.0f;
+                pcSheets[i].isKO = true;
+                pcSheets[i].canAct = false;
+            }
+        }
     }
 }

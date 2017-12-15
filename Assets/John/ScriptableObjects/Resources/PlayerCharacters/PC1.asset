@@ -15,7 +15,7 @@ MonoBehaviour:
   job: {fileID: 11400000, guid: c32c88c2873b9da48811f6fa28300fb7, type: 2}
   LVL: 5
   baseHP: 100
-  currHP: 365
+  currHP: 0
   maxHP: 1300
   baseMP: 1
   currMP: 1
@@ -27,11 +27,11 @@ MonoBehaviour:
   currSpirit: 1
   maxSpirit: 1
   baseCT: 1
-  currCT: 16
+  currCT: 36
   maxCT: 1
   XP: 670600
   pAttackStrength: 150
-  canAct: 1
+  canAct: 0
   isKO: 1
   Weapon: {fileID: 11400000, guid: 4822c6fe18cdb9a4ab151a43af1664c0, type: 2}
   Armor: {fileID: 11400000, guid: 43116db0940061f4ab6e534f04ca207a, type: 2}
