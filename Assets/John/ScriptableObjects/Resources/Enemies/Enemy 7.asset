@@ -14,8 +14,8 @@ MonoBehaviour:
   characterName: Naughty Nate
   LVL: 3
   baseHP: 0
-  currHP: 10
-  maxHP: 0
+  currHP: 7
+  maxHP: 10
   baseMP: 0
   currMP: 0
   maxMP: 0

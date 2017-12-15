@@ -23,6 +23,13 @@ public class BattleCanvasController : MonoBehaviour {
 	[HideInInspector]
 	public float ct4Speed;
 
+	public GameObject skillButton;
+	GameObject skillPanel;
+	GameObject skillPanelUI;
+	public Skill selectedSkill;
+	bool skillSelected = false;
+	bool attackSelected = false;
+
 
 	[HideInInspector]
 	public enum Selection {none, pc, action, enemy}
@@ -39,6 +46,10 @@ public class BattleCanvasController : MonoBehaviour {
 	public List<GameObject> enemyPanelList = new List<GameObject>();
 	public List<GameObject> actionPanelList = new List<GameObject>();
 	public List<GameObject> enemySpriteList = new List<GameObject>();
+	public List<GameObject> skillPanelList = new List<GameObject>();
+	List<Skill> skillList = new List<Skill>();
+	List<GameObject> skillObjects = new List<GameObject>();
+
 
 	public Queue<IEnumerator> actionQueue = new Queue<IEnumerator>();
 
@@ -79,6 +90,12 @@ public class BattleCanvasController : MonoBehaviour {
 		enemySpriteList.Add(GameObject.Find("EnemySprite3"));
 		enemySpriteList.Add(GameObject.Find("EnemySprite4"));
 
+
+		skillPanel = GameObject.Find("SkillPanel");
+		skillPanelUI = GameObject.Find("SkillPanelUI");
+		//CreateSkillList(0); //TODO: Populate menu when pc is selected, then skils selected
+		skillPanel.SetActive(false);
+
 		StartCoroutine("ActionBuffer");
 		
 	}
@@ -95,14 +112,15 @@ public class BattleCanvasController : MonoBehaviour {
 		for(int i = 0; i < 4; i++){
 			if(BattleManager.instance.pcSheets[i].canAct == false)
 				pcPanelList[i].GetComponent<Image>().color = new Color(1,1,1,0.1f);
+				
 			else
 				pcPanelList[i].GetComponent<Image>().color = new Color(1,1,1,1.0f);
 		}
 		for(int i = 0; i < 4; i++)//{
 			if(BattleManager.instance.enemySheets[i].canAct == false)
-				//enemyPanelList[i].GetComponent<Image>().color = new Color(1,1,1,0.1f);
-			//else
-				//enemyPanelList[i].GetComponent<Image>().color = new Color(1,1,1,1.0f);
+				enemyPanelList[i].GetComponent<Image>().color = new Color(1,1,1,0.1f);
+			else
+				enemyPanelList[i].GetComponent<Image>().color = new Color(1,1,1,1.0f);
 		//}
 
 		CheckHealth();
@@ -116,16 +134,24 @@ public class BattleCanvasController : MonoBehaviour {
 	public void PCClick(int playerNum){
 		if(BattleManager.instance.CanPCAct(playerNum) && selection == Selection.none){
 			actionPanel.SetActive(true);
+			AudioManager.PlayEffect("Select1");
 			selection = Selection.pc;
 			actingPlayer = playerNum;
 			Debug.Log("Player selected, choose action");
 		}
-		else if(selection == Selection.action){
+		else if(selection == Selection.action && skillSelected){
 			selection = Selection.none;
-			actionPanel.SetActive(false);
+			UseSkill(GameManager.instance.pcList[playerNum], GameManager.instance.pcList[actingPlayer], selectedSkill);
+			skillSelected = false;
+			//skillPanel.SetActive(false);
+			HideSkillMenu();
+			AudioManager.PlayEffect("Attack1");
 			Debug.Log("Performing action on target pc");
 			playerActed(actingPlayer);
 			//actingPlayer = -1;
+		}
+		else{
+			//do nothing
 		}
 	}
 
@@ -135,11 +161,16 @@ public class BattleCanvasController : MonoBehaviour {
 				case(1):
 					selection = Selection.action;
 					action = Action.attack;
+					attackSelected = true;
+					AudioManager.PlayEffect("Select2");
 					Debug.Log("Action Selected, choose target");
 				break;
 				case(2):
 					selection = Selection.action;
 					action = Action.skill;
+					CreateSkillList(actingPlayer);
+					DisplaySkillMenu();
+					AudioManager.PlayEffect("Select1");
 					Debug.Log("Action Selected, choose target");
 				break;
 				case(3):
@@ -151,17 +182,25 @@ public class BattleCanvasController : MonoBehaviour {
 					Debug.Log("Action Error");
 				break;
 			}
-		}	
-			
+		}			
 	}
 
 	public void EnemyClick(int enemyNum){
-		if(selection == Selection.action){
+		if(selection == Selection.action && (skillSelected || attackSelected)){
 			switch(action){
 				case(Action.attack):
 					AttackEnemy(enemyNum, actingPlayer);
+					AudioManager.PlayEffect("Attack1");
+					attackSelected = false;
+
 				break;
 				case(Action.skill):
+					UseSkill(GameManager.instance.enemyList[enemyNum], GameManager.instance.pcList[actingPlayer], selectedSkill);
+					//skillPanel.SetActive(false);
+					AudioManager.PlayEffect("Attack1");
+					HideSkillMenu();
+					skillSelected = false;
+					
 				break;
 				case(Action.item):
 				break;
@@ -176,6 +215,13 @@ public class BattleCanvasController : MonoBehaviour {
 		}
 	}
 
+	public void SkillClicked(Skill skill){
+		selectedSkill = skill;
+		skillSelected = true;
+		AudioManager.PlayEffect("Select2");
+
+	}
+
 	public Image GetCTImage(Image ct){
 		return ctList[ctList.IndexOf(ct)];
 	}
@@ -184,7 +230,7 @@ public class BattleCanvasController : MonoBehaviour {
 		ctList[ctList.IndexOf(ct)].fillAmount = 1;
 	}
 
-	void SetPlayerStatsUI(){
+	public void SetPlayerStatsUI(){
        for (int i = 0; i < pcPanelList.Count; i++){
 		   GameObject currentPanel = pcPanelList[i];
 
@@ -203,7 +249,7 @@ public class BattleCanvasController : MonoBehaviour {
 		return playerPanel.transform.Find(attr).gameObject;
 	}
 
-	void SetEnemyStatsUI(){
+	public void SetEnemyStatsUI(){
 		for(int i = 0; i < enemyPanelList.Count; i++){
 			GameObject currentPanel = enemyPanelList[i];
 
@@ -233,6 +279,7 @@ public class BattleCanvasController : MonoBehaviour {
 		GameManager.instance.pcList[Random.Range(0,4)].currHP -= GameManager.instance.enemyList[enemy].pAttackStrength;
 		Debug.Log(GameManager.instance.enemyList[enemy] +  " attacks!");
 		enemyPanelList[enemy].GetComponent<Image>().color = new Color(1,1,1,0.1f);
+		AudioManager.PlayEffect("Attack5");
 
 		GameManager.instance.enemyList[enemy].canAct = false;
 		GameManager.instance.enemyList[enemy].isWaiting = true;
@@ -258,6 +305,7 @@ public class BattleCanvasController : MonoBehaviour {
 		for(int i = 0; i < GameManager.instance.enemyList.Count; i++){
 			EnemyCharacter newEnemy = Instantiate(randomEnemyArr[Random.Range(0, randomEnemyArr.Length)]);
 			GameManager.instance.enemyList[i] = newEnemy;
+			GameManager.instance.enemyList[i].currHP = GameManager.instance.enemyList[i].maxHP;
 		}
 	}
 
@@ -265,6 +313,8 @@ public class BattleCanvasController : MonoBehaviour {
 		for(int i = 0; i < GameManager.instance.enemyList.Count; i++){
 			if(GameManager.instance.enemyList[i].currHP <= 0.0f){
 				GameManager.instance.enemyList[i].isKO = true;
+				RewardManager.rewardXP += GameManager.instance.enemyList[i].LVL * 100;
+				RewardManager.rewardGold += GameManager.instance.enemyList[i].LVL * Random.Range(1,100);
 			}
 			if(GameManager.instance.enemyList[i].isKO == true){
 				BattleManager.instance.enemyCT[i] = 0.0f;
@@ -284,6 +334,11 @@ public class BattleCanvasController : MonoBehaviour {
 		EnemyCharacter pc = GameManager.instance.enemyList.Find((g) => !g.isKO);
 		if(pc == null){
 			Debug.Log("Player Wins!!!!");
+			for(int i = 0; i < 3; i++){
+				GameManager.instance.pcList[i].XP += RewardManager.rewardXP;
+			}
+			PlayerInventory.instance.gold += RewardManager.rewardGold;
+			RewardManager.ResetReward();
 			SceneManager.LoadScene(postBattleScene);
 		} 
 	}
@@ -291,6 +346,7 @@ public class BattleCanvasController : MonoBehaviour {
 	void CheckLose(){
 		PlayerCharacter pc = GameManager.instance.pcList.Find((g) => g.isKO);
 		if(pc == null) Debug.Log("Player Wins!!!!");
+		RewardManager.ResetReward();
 	}
 
 	T GetRand<T> (List<T> list) {
@@ -304,5 +360,54 @@ public class BattleCanvasController : MonoBehaviour {
 			}
 			yield return new WaitForEndOfFrame();
 		}
+	}
+
+	void CreateSkillList(int pc){
+		skillList = GameManager.instance.pcList[pc].job.GetSkills(GameManager.instance.pcList[pc].LVL);
+		for(int i = 0; i < skillList.Count; i++){
+			GameObject tempButton = GameObject.Instantiate(skillButton);
+			skillObjects.Add(tempButton);
+			tempButton.transform.SetParent(skillPanelUI.transform);
+			tempButton.transform.localScale = Vector3.one;
+			tempButton.GetComponent<Text>().text = skillList[i].skillName;
+			tempButton.GetComponent<SkillButtonController>().skill = skillList[i];
+		}
+	}
+
+	void DisplaySkillMenu(){
+		actionPanel.SetActive(false);
+		skillPanel.SetActive(true);
+	}
+
+	void HideSkillMenu(){
+		skillPanel.SetActive(false);
+		skillList.Clear();
+		for(int i = 0; i < skillObjects.Count; i++){
+			Destroy(skillObjects[i]);
+		}
+		skillObjects.Clear();
+	}
+
+	void UseSkill(ScriptableObject target, ScriptableObject caster, Skill skill){
+		if(target is EnemyCharacter){
+			EnemyCharacter targetedEnemy = target as EnemyCharacter;
+			if(skill.damage != 0){
+				targetedEnemy.currHP -= skill.damage;
+			}
+		}
+		else if(target is PlayerCharacter){
+			PlayerCharacter targetedPlayer = target as PlayerCharacter;
+			if(skill.damage != 0){
+				targetedPlayer.currHP -= skill.damage;
+			}
+		}
+
+		SetEnemyStatsUI();
+		SetPlayerStatsUI();
+	}
+
+	public void PlayerReady(int pc){
+		BattleManager.instance.readyToAct[pc] = false;
+		AudioManager.PlayEffect("Ready1");
 	}
 }

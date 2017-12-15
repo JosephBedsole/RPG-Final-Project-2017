@@ -9,11 +9,9 @@ public class BattleManager : MonoBehaviour {
 
     public float startCT = 0.0f;
     public float debugCTRate = 0.05f;
-
-    float MAXCT = 1.0f;
-    float MINCT = 0.0f;
     public float BASE_CT_CHARGE = 0.00001f;
-
+    [HideInInspector]
+    public bool[] readyToAct = {false, false, false, false};
     [HideInInspector]
     public float[] pcCT = {0.0f,0.0f,0.0f,0.0f};
     [HideInInspector]
@@ -29,6 +27,9 @@ public class BattleManager : MonoBehaviour {
     public List<EnemyCharacter> enemySheets {
         get{return _enemySheets;}
     }
+
+    float MAXCT = 1.0f;
+    float MINCT = 0.0f;
     
     void Awake(){
         if(instance == null) instance = this;
@@ -72,12 +73,24 @@ public class BattleManager : MonoBehaviour {
     public void UpdateCT(){
         for (int i = 0; i < pcPanelList.Count; i++){
             GameObject ctTemp = pcPanelList[i].transform.Find("CT").gameObject;
-            if(ctTemp.GetComponent<Image>().fillAmount < 1.0f){
+            if(pcSheets[i].currHP <= 0){
+                CheckPlayerDeaths();
+            }
+            else if(ctTemp.GetComponent<Image>().fillAmount < 1.0f){
+                
                 ctTemp.GetComponent<Image>().fillAmount += BASE_CT_CHARGE + (float)pcSheets[i].currCT/1000;
                 pcCT[i] += BASE_CT_CHARGE + (float)pcSheets[i].currCT/1000; // TODO, replace image scale stuff with this
+
+                if(ctTemp.GetComponent<Image>().fillAmount >= 1.0f){
+                    readyToAct[i] = true;
+                    pcSheets[i].canAct = true;
+                }
+            }
+            else if(pcSheets[i].canAct && readyToAct[i]){
+                BattleCanvasController.instance.PlayerReady(i);
             }
             else{
-                pcSheets[i].canAct = true;
+               //Stuff
             }
         }
 
@@ -132,4 +145,16 @@ public class BattleManager : MonoBehaviour {
     public bool CanPCAct(int pcSheet){
         return pcSheets[pcSheet].canAct;  
     }
+
+    public void CheckPlayerDeaths(){
+        for(int i = 0; i < 4; i++){
+            if(pcSheets[i].currHP <= 0){
+                pcCT[i] = 0.0f;
+                pcSheets[i].isKO = true;
+                pcSheets[i].canAct = false;
+            }
+        }
+    }
+
+   
 }

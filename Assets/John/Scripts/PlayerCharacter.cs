@@ -7,6 +7,7 @@ public class PlayerCharacter : ScriptableObject {
 
 	//Base
 	public string characterName = "";
+	public Job job;
 	public int LVL = 1;
 	public int baseHP = 1;
 	public int currHP = 1;
@@ -33,6 +34,10 @@ public class PlayerCharacter : ScriptableObject {
 	public bool canAct = false;
 	public bool isKO = false;
 
+	//Items
+	public Items Weapon;
+	public Items Armor;
+	public Items Accessory;
 	
 
 }

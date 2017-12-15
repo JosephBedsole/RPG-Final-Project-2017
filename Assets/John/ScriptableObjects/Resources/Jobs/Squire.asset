@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c85260183b846499058598f5231af5, type: 3}
+  m_Name: Squire
+  m_EditorClassIdentifier: 
+  jobName: Squire
+  unlockableSkills:
+  - skill: {fileID: 11400000, guid: c8e1b15a01ea1b04bb96fe21da00b0de, type: 2}
+    lvl: 1

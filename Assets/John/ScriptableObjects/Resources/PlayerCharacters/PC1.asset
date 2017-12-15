@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 565174122c1d0714fb21d3129d1859a5, type: 3}
+  m_Name: PC1
+  m_EditorClassIdentifier: 
+  characterName: Bobby
+  job: {fileID: 11400000, guid: c32c88c2873b9da48811f6fa28300fb7, type: 2}
+  LVL: 5
+  baseHP: 100
+  currHP: 100
+  maxHP: 100
+  baseMP: 1
+  currMP: 1
+  maxMP: 1
+  baseGuts: 1
+  currGuts: 1
+  maxGuts: 1201
+  baseSpirit: 1
+  currSpirit: 1
+  maxSpirit: 1
+  baseCT: 1
+  currCT: 126
+  maxCT: 1
+  XP: 3638300
+  pAttackStrength: 150
+  canAct: 0
+  isKO: 1
+  Weapon: {fileID: 11400000, guid: 4822c6fe18cdb9a4ab151a43af1664c0, type: 2}
+  Armor: {fileID: 11400000, guid: 43116db0940061f4ab6e534f04ca207a, type: 2}
+  Accessory: {fileID: 11400000, guid: 2e8399b2faebb784495f022681e314e7, type: 2}

@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/John/Scenes/BattleScene.unity
-    guid: 9034e601f1ebf9e4196025c3e870b930
+    path: Assets/MainScenes/MainMenuFinal.unity
+    guid: 4d379d9ee39f74f4ab4d66714a5d551a
   - enabled: 1
-    path: Assets/John/Scenes/VictoryScene.unity
-    guid: 60f5eafc58e2c9b4d978f7c5319f2626
+    path: Assets/MainScenes/Dungeon.unity
+    guid: da41816252ea23c448ddfa10d7997030
   - enabled: 1
-    path: Assets/Joseph/Scenes/DungeonTest.unity
-    guid: 4c9e3e90de3a5b845aae4476b8cd9ed1
+    path: Assets/MainScenes/Town.unity
+    guid: 338cbd7f6e39abe469be6f80e76e81b7
   - enabled: 1
-    path: Assets/Joseph/Scenes/InventoryTest.unity
-    guid: 38e7f2c1f819536478fb7242a2f69309
+    path: Assets/MainScenes/BattleSceneFinal.unity
+    guid: 7488cb35d00b6a34998685114c30ff81
