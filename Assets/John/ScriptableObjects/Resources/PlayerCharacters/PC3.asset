@@ -14,9 +14,9 @@ MonoBehaviour:
   characterName: Joey
   job: {fileID: 11400000, guid: 1e37b5bca7f8e21489c4c36c3404e435, type: 2}
   LVL: 1
-  baseHP: 1
-  currHP: 30
-  maxHP: 1
+  baseHP: 100
+  currHP: 60
+  maxHP: 100
   baseMP: 1
   currMP: 1
   maxMP: 1
@@ -29,7 +29,7 @@ MonoBehaviour:
   baseCT: 1
   currCT: 1
   maxCT: 1
-  XP: 0
+  XP: 670600
   pAttackStrength: 30
   canAct: 0
   isKO: 1

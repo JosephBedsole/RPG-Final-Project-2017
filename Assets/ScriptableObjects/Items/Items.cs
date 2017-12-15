@@ -18,7 +18,12 @@ public class Items : ScriptableObject {
 	public string damageType;
 	public int minDamage;
 	public int maxDamage;
-	public int speed;
-	public int crit;
-	public int health;
+	public int attackPower;
+	public int speed; // not used right now?
+	public int crit; // not used right now?
+	public int health; 
+	public int ct;
+	public int guts;
+	public int spirit;
+
 }

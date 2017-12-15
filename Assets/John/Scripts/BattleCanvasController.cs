@@ -230,7 +230,7 @@ public class BattleCanvasController : MonoBehaviour {
 		ctList[ctList.IndexOf(ct)].fillAmount = 1;
 	}
 
-	void SetPlayerStatsUI(){
+	public void SetPlayerStatsUI(){
        for (int i = 0; i < pcPanelList.Count; i++){
 		   GameObject currentPanel = pcPanelList[i];
 
@@ -249,7 +249,7 @@ public class BattleCanvasController : MonoBehaviour {
 		return playerPanel.transform.Find(attr).gameObject;
 	}
 
-	void SetEnemyStatsUI(){
+	public void SetEnemyStatsUI(){
 		for(int i = 0; i < enemyPanelList.Count; i++){
 			GameObject currentPanel = enemyPanelList[i];
 

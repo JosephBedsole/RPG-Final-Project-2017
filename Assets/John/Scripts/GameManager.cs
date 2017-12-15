@@ -34,6 +34,9 @@ public class GameManager : MonoBehaviour {
 			StartBattle();
 		}
 		Mathf.Clamp(battleChance, 0.0f, 50.0f);
+		CompareCurrandMaxAttributes();
+		CompareCurrToZero();
+		CompareCurrToZeroEnemy();
 	}
 
 
@@ -68,9 +71,53 @@ public class GameManager : MonoBehaviour {
 		for(int i = 0; i < 4; i++){
 			PlayerCharacter tPC = pcList[i];
 			tPC.maxHP = tPC.baseHP + tPC.Weapon.health + tPC.Armor.health + tPC.Accessory.health;	
-			tPC.maxGuts = tPC.baseGuts;
-			tPC.pAttackStrength = tPC.pAttackStrength + tPC.Weapon.maxDamage + tPC.Armor.maxDamage + tPC.Accessory.maxDamage;
-			tPC.currCT = tPC.currCT + tPC.Accessory.speed;
+			tPC.maxGuts = tPC.baseGuts + tPC.Weapon.guts + tPC.Armor.health + tPC.Accessory.health;
+			tPC.pAttackStrength = tPC.pAttackStrength + tPC.Weapon.attackPower + tPC.Armor.attackPower + tPC.Accessory.attackPower;
+			tPC.currCT = tPC.currCT + tPC.Weapon.ct + tPC.Armor.ct + tPC.Accessory.ct;
 		}
+	}
+
+	void CompareCurrandMaxAttributes(){
+		for(int i = 0; i < 4; i++){
+			PlayerCharacter tPC = pcList[i];
+			if(tPC.currHP > tPC.maxHP){
+				tPC.currHP = tPC.maxHP;
+				BattleCanvasController.instance.SetPlayerStatsUI();
+			}
+			else if(tPC.currMP > tPC.maxMP){
+				tPC.currMP = tPC.maxHP;
+				BattleCanvasController.instance.SetPlayerStatsUI();
+			}
+		}
+
+		
+	}
+
+	void CompareCurrToZero(){
+		for(int i = 0; i < 4; i++){
+			PlayerCharacter tPC = pcList[i];
+			if(tPC.currHP < 0){
+				tPC.currHP = 0;
+				BattleCanvasController.instance.SetPlayerStatsUI();
+			}
+			else if(tPC.currMP < 0){
+				tPC.currMP = 0;
+				BattleCanvasController.instance.SetPlayerStatsUI();
+			}
+		}
+	}
+
+	void CompareCurrToZeroEnemy(){
+		for(int i = 0; i < 4; i++){
+			EnemyCharacter tEnemy = enemyList[i];
+			if(tEnemy.currHP < 0){
+				tEnemy.currHP = 0;
+				BattleCanvasController.instance.SetEnemyStatsUI();
+			}
+			else if(tEnemy.currMP < 0){
+				tEnemy.currMP = 0;
+				BattleCanvasController.instance.SetEnemyStatsUI();
+			}
+		}	
 	}
 }

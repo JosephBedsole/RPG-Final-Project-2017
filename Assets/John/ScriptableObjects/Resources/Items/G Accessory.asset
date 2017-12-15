@@ -20,6 +20,10 @@ MonoBehaviour:
   damageType: 
   minDamage: 0
   maxDamage: 20
+  attackPower: 0
   speed: 100
   crit: 0
   health: 900
+  ct: 5
+  guts: 0
+  spirit: 0
