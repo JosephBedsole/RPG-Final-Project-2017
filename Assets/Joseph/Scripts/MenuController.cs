@@ -119,12 +119,11 @@ public class MenuController : MonoBehaviour {
 		statsMenu.gameObject.SetActive(true);		
 	}
 
-	public void DisplayEquipItemMenu ()
+	public void DisplayInventoryToEquip ()
 	{
 		inEquipItemMenu = true;
 
 		equipItemMenu.gameObject.SetActive(true);
-		equipmentMenu.gameObject.SetActive(false);
 		statsMenu.gameObject.SetActive(false);		
 	}
 	
@@ -162,6 +161,7 @@ public class MenuController : MonoBehaviour {
 		partyMenu.gameObject.SetActive(true);
 		equipmentMenu.gameObject.SetActive(false);
 		statsMenu.gameObject.SetActive(false);
+		equipItemMenu.gameObject.SetActive(false);
 	}
 
 	public void ReturnToEquipmentMenu ()

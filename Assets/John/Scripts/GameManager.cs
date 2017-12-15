@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
 	public float battleRollCheck = 70.0f;
 	public string townSceneName;
 	public string dungeonSceneName;
+	public string battleSceneName;
 	public float townBattleChance = 200;
 	public float dungeonBattleChannge = 65;
 
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour {
 		else{
 			Destroy(gameObject);
 		}
+
+		DontDestroyOnLoad(gameObject);
 	}
 
 	void OnEnable(){
@@ -67,7 +70,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void StartBattle(){
-		SceneManager.LoadScene("BattleScene");
+		SceneManager.LoadScene(battleSceneName);
 	}
 
 	public void RandomEncounterRoll(){
@@ -141,7 +144,15 @@ public class GameManager : MonoBehaviour {
 		else if(scene.name == townSceneName){
 			battleRollCheck = townBattleChance; //No encounters 
 		}
+		if(scene.name == battleSceneName){
+			InitiateEnemyStats();
+		}
 	}
 
-
+ 	void InitiateEnemyStats(){
+        for(int i = 0; i < enemyList.Count; i++){
+        	enemyList[i].currHP = GameManager.instance.enemyList[i].maxHP;
+			BattleCanvasController.instance.SetEnemyStatsUI();
+        }
+    }
 }

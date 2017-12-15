@@ -35,19 +35,20 @@ public class PlayerInventory : MonoBehaviour {
 
 	public void EquipItem (Items itemSelected) // This will equip an item to the selected character
 	{
+		Debug.Log("YeeeeeeeeeeeeEEEEEESSSSSSSSssssssssssss");
 		// if (player class == weapon class);
 		if (menuCon.characterSelected.mainHand.itemTag == "weapon") // item tag == weapon
 		{
 			//   Move the currently equipped item to the inventory
-			//   menuCon.characterSelected.mainHand = itemz[];
+			menuCon.characterSelected.mainHand = itemSelected;
 		}
 		else if (menuCon.characterSelected.armor.itemTag == "armor") // item tag == armor
 		{
-			//   menuCon.characterSelected.armor = itemz[];
+			menuCon.characterSelected.armor = itemSelected;
 		}
 		else if (menuCon.characterSelected.accessory.itemTag == "accessory") // item tag == accessory
 		{
-			//   menuCon.characterSelected.accessory = itemz[];
+			menuCon.characterSelected.accessory = itemSelected;
 		}
 		else
 		{

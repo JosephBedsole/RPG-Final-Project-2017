@@ -305,6 +305,7 @@ public class BattleCanvasController : MonoBehaviour {
 		for(int i = 0; i < GameManager.instance.enemyList.Count; i++){
 			EnemyCharacter newEnemy = Instantiate(randomEnemyArr[Random.Range(0, randomEnemyArr.Length)]);
 			GameManager.instance.enemyList[i] = newEnemy;
+			GameManager.instance.enemyList[i].currHP = GameManager.instance.enemyList[i].maxHP;
 		}
 	}
 

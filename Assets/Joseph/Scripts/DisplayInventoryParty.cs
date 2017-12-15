@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class DisplayInventory : MonoBehaviour {
+public class DisplayInventoryParty : MonoBehaviour {
 
 
 	[Header("Inventory Slots")]
@@ -40,7 +40,33 @@ public class DisplayInventory : MonoBehaviour {
 		iCrit.text = "Crit: " + item.crit;
 		iHealth.text = "Health: " + item.health;
 	}
-	
+
+	MenuController menuCon = MenuController.instance;
+
+	public void EquipItem (Items itemSelected) // This will equip an item to the selected character
+	{
+		Debug.Log("YeeeeeeeeeeeeEEEEEESSSSSSSSssssssssssss");
+		// if (player class == weapon class);
+		if (menuCon.characterSelected.mainHand.itemTag == "weapon") // item tag == weapon
+		{
+			//   Move the currently equipped item to the inventory
+			menuCon.characterSelected.mainHand = itemSelected;
+		}
+		else if (menuCon.characterSelected.armor.itemTag == "armor") // item tag == armor
+		{
+			menuCon.characterSelected.armor = itemSelected;
+		}
+		else if (menuCon.characterSelected.accessory.itemTag == "accessory") // item tag == accessory
+		{
+			menuCon.characterSelected.accessory = itemSelected;
+		}
+		else
+		{
+			Debug.Log("You can't equip that item dingus!");
+		}
+		// else
+		// Display: "You can't equip that class of weapon."
+	}
 
 	public void Display ()
 	{
@@ -79,7 +105,7 @@ public class DisplayInventory : MonoBehaviour {
 			Button equipItemButton = newSlot.transform.Find("Equip Button").GetComponent<Button>();   //   Editing Starts Here
 
 			firstAction += delegate{DisplayInventoryStats(item);};  
-			secondAction += delegate{slotitem.EquipItem(item);};                           //   This is where I'm giving the button an onClick() event;
+			secondAction += delegate{EquipItem(item);};                           //   This is where I'm giving the button an onClick() event;
 			newItem.onClick.AddListener(firstAction);
 			equipItemButton.onClick.AddListener(secondAction);
 

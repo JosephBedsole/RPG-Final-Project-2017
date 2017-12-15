@@ -15,7 +15,7 @@ MonoBehaviour:
   LVL: 2
   baseHP: 0
   currHP: 10
-  maxHP: 0
+  maxHP: 10
   baseMP: 0
   currMP: 0
   maxMP: 0

@@ -15,8 +15,8 @@ MonoBehaviour:
   job: {fileID: 11400000, guid: c32c88c2873b9da48811f6fa28300fb7, type: 2}
   LVL: 5
   baseHP: 100
-  currHP: 0
-  maxHP: 1300
+  currHP: 100
+  maxHP: 100
   baseMP: 1
   currMP: 1
   maxMP: 1
@@ -27,9 +27,9 @@ MonoBehaviour:
   currSpirit: 1
   maxSpirit: 1
   baseCT: 1
-  currCT: 36
+  currCT: 126
   maxCT: 1
-  XP: 670600
+  XP: 3638300
   pAttackStrength: 150
   canAct: 0
   isKO: 1
